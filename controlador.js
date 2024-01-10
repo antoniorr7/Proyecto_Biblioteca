@@ -1,10 +1,10 @@
-import {Modelo} from './modelos/modelo.js'
+import {Modelo} from './models/modelo.js'
 import { MenuInicial } from './views/vmenuinicial.js';
 import { ModificarLibro } from './views/vmodificarlibro.js';
 import { ModificarAutor } from './views/vmodificarautor.js';
 import { ListarAutor } from './views/vlistarautor.js';
 import { ListarLibro } from './views/vlistarlibro.js';
-import {Vista} from './vistas/vista.js'
+import {Vista} from './views/vista.js'
 
 class Controlador {
     vistas = new Map();
