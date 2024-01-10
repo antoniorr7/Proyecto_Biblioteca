@@ -1,6 +1,10 @@
 export class Vista {
     static {
       Vista.vmenuinicial = Symbol('Inicio') //Hacerlo con todas las vistas
+      Vista.vlistarautores = Symbol('Listar Autores')
+      Vista.vmodificarautores = Symbol('Modificar Libros')
+      Vista.vlistarlibros = Symbol('Listar Libros')
+      Vista.vmodificarlibros = Symbol('Modificar Libros')
     }
   
     constructor(controlador, base) {
@@ -15,4 +19,3 @@ export class Vista {
         this.base.style.display = 'none'
     }
   }
-  

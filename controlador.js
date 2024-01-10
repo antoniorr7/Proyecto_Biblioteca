@@ -14,7 +14,7 @@ class Controlador {
         this.vistas.set(Vista.vmenuinicial, new MenuInicial(this, divMenuInicial))
     
         this.verVista(Vista.vmenuinicial)
-      }
+    }
 
     verVista (vista) {
         this.ocultarVistas()
