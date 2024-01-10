@@ -30,9 +30,9 @@ class Controlador {
         
         this.verVista(Vista.vmenuinicial)
 
-        const inicio = document.getElementsByName('button')[0] 
-        const libros  = document.getElementsByName('button')[1] 
-        const autores = document.getElementsByName('button')[2] 
+        const inicio = document.getElementById('btnInicio')
+        const libros  = document.getElementById('btnLibro')
+        const autores = document.getElementById('btnAutor')
         
         inicio.onclick = this.pulsarInicio.bind(this);
         libros.onclick = this.pulsarLibro.bind(this);
