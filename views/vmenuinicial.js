@@ -1,6 +1,6 @@
 import { Vista } from './vista.js'
 
-export class VistaMenu extends Vista {
+export class MenuInicial extends Vista {
 
   constructor (controlador, base) {
     super(controlador, base)

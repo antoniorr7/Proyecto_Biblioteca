@@ -1,6 +1,6 @@
 import { Vista } from './vista.js'
 
-export class ModLibros extends Vista {
+export class ListarLibro extends Vista {
 
   constructor (controlador, base) {
     super(controlador, base)
