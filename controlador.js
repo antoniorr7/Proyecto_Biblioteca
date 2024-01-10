@@ -1,15 +1,17 @@
-import {Modelo} from './models/modelo.js'
-import { MenuInicial } from './views/vmenuinicial.js';
-import { ModificarLibro } from './views/vmodificarlibro.js';
-import { ModificarAutor } from './views/vmodificarautor.js';
-import { ListarAutor } from './views/vlistarautor.js';
-import { ListarLibro } from './views/vlistarlibro.js';
-import {Vista} from './views/vista.js'
+import { Modelo } from './models/modelo.js'
+import { MenuInicial } from './views/vmenuinicial.js'
+import { ModificarLibro } from './views/vmodificarlibro.js'
+import { ModificarAutor } from './views/vmodificarautor.js'
+import { ListarAutor } from './views/vlistarautor.js'
+import { ListarLibro } from './views/vlistarlibro.js'
+import { Vista } from './views/vista.js'
+import { Rest } from './service/rest.js'
 
 class Controlador {
-    vistas = new Map();
+    vistas = new Map()
+    rest = new Rest()
 
-    constructor () {
+    constructor() {
         this.modelo = new Modelo()
 
         //conseguimos la referencia de la interface
@@ -34,9 +36,9 @@ class Controlador {
         const libros  = document.getElementById('btnLibro')
         const autores = document.getElementById('btnAutor')
         
-        inicio.onclick = this.pulsarInicio.bind(this);
-        libros.onclick = this.pulsarLibro.bind(this);
-        autores.onclick = this.pulsarAutor.bind(this);
+        inicio.onclick = this.pulsarInicio.bind(this)
+        libros.onclick = this.pulsarLibro.bind(this)
+        autores.onclick = this.pulsarAutor.bind(this)
     
     }
 
@@ -50,6 +52,17 @@ class Controlador {
 
     pulsarAutor(){
         this.verVista(Vista.vlistarautor)
+        this.mostrarAutor();
+    }
+
+    async mostrarAutor() {
+        const autores = await this.rest.getAutor()
+
+        if (autores) {
+            console.log('Lista de autores:', autores)
+        } else {
+            console.log('No se pudo obtener la lista de autores')
+        }
     }
 
     verVista (vista) {
