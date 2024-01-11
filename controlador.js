@@ -5,14 +5,14 @@ import { ModificarAutor } from './views/vmodificarautor.js'
 import { ListarAutor } from './views/vlistarautor.js'
 import { ListarLibro } from './views/vlistarlibro.js'
 import { Vista } from './views/vista.js'
-import { Rest } from './service/rest.js'
 
-class Controlador {
+export class Controlador {
     vistas = new Map()
-    rest = new Rest()
+   
 
     constructor() {
         this.modelo = new Modelo()
+        
 
         //conseguimos la referencia de la interface
         const divMenuInicial = document.getElementById('divMenuInicial')
@@ -48,32 +48,16 @@ class Controlador {
 
     pulsarLibro(){
         this.verVista(Vista.vlistarlibro)
-        this.mostrarObra()
+        this.modelo.mostrarObra()
     }
 
     pulsarAutor(){
         this.verVista(Vista.vlistarautor)
-        this.mostrarAutor();
+        this.modelo.mostrarAutor();
+       
     }
 
-    async mostrarAutor() {
-        const autores = await this.rest.getAutor()
-
-        if (autores) {
-            console.log('Lista de autores:', autores)
-        } else {
-            console.log('No se pudo obtener la lista de autores')
-        }
-    }
-    async mostrarObra() {
-        const obra = await this.rest.getObra()
-
-        if (obra) {
-            console.log('Lista de obras:', obra)
-        } else {
-            console.log('No se pudo obtener la lista de obras')
-        }
-    }
+   
     verVista (vista) {
         this.ocultarVistas()
         this.vistas.get(vista).mostrar(true)
