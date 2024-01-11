@@ -1,6 +1,6 @@
 export class Rest {
     constructor() {
-        this.baseUrl = 'https://migueljaque.com/fanlib/v1/autor';
+        this.baseUrl = 'https://migueljaque.com/fanlib/v1';
         this.token = 'testToken';
         this.headers = {
             'Fanlibtoken': this.token,
@@ -14,7 +14,8 @@ export class Rest {
             const url = `${this.baseUrl}/autor`;
             const response = await fetch(url, {
                 method: 'GET',
-                headers: this.headers
+                headers: this.headers,
+                mode: 'cors'  // Agregar esta línea para manejar CORS
             });
 
             return this.handleResponse(response);
@@ -85,4 +86,89 @@ export class Rest {
             return null;
         }
     }
+    async getObra() {
+        try {
+            const url = `${this.baseUrl}/obra`;
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: this.headers,
+                mode: 'cors'  // Agregar esta línea para manejar CORS
+            });
+
+            return this.handleResponse(response);
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    }
+
+    async getObraPorId(id) {
+        try {
+            const url = `${this.baseUrl}/obra/${id}`;
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: this.headers
+            });
+
+            return this.handleResponse(response);
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    }
+
+    async crearObra(obraData) {
+        try {
+            const url = `${this.baseUrl}/obra`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: this.headers,
+                body: JSON.stringify(obraData)
+            });
+
+            return this.handleResponse(response);
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    }
+
+    async actualizarObra(obraData) {
+        try {
+            const url = `${this.baseUrl}/obra`;
+            const response = await fetch(url, {
+                method: 'PUT',
+                headers: this.headers,
+                body: JSON.stringify(obraData)
+            });
+
+            return this.handleResponse(response);
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    }
+
+    async borrarObra(id) {
+        try {
+            const url = `${this.baseUrl}/obra/${id}`;
+            const response = await fetch(url, {
+                method: 'DELETE',
+                headers: this.headers
+            });
+
+            return this.handleResponse(response);
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    }
+
+    handleResponse(response) {
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+    }
 }
+

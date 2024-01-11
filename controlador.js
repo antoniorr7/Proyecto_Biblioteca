@@ -48,6 +48,7 @@ class Controlador {
 
     pulsarLibro(){
         this.verVista(Vista.vlistarlibro)
+        this.mostrarObra()
     }
 
     pulsarAutor(){
@@ -64,7 +65,15 @@ class Controlador {
             console.log('No se pudo obtener la lista de autores')
         }
     }
+    async mostrarObra() {
+        const obra = await this.rest.getObra()
 
+        if (obra) {
+            console.log('Lista de obras:', obra)
+        } else {
+            console.log('No se pudo obtener la lista de obras')
+        }
+    }
     verVista (vista) {
         this.ocultarVistas()
         this.vistas.get(vista).mostrar(true)
