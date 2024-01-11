@@ -4,6 +4,8 @@ import { ModificarLibro } from './views/vmodificarlibro.js';
 import { ModificarAutor } from './views/vmodificarautor.js';
 import { ListarAutor } from './views/vlistarautor.js';
 import { ListarLibro } from './views/vlistarlibro.js';
+import { CrearAutor } from './views/vcrearautor.js';
+import { CrearLibro } from './views/vcrearlibro.js';
 import { Vista } from './views/vista.js';
 
 export class Controlador {
@@ -20,6 +22,8 @@ export class Controlador {
         const divListarLibro = document.getElementById('divListarLibro')
         const divModificarAutor = document.getElementById('divModificarAutor')
         const  divModificarLibro= document.getElementById('divModificarLibro')
+        const divCrearAutor = document.getElementById('divCrearAutor')
+        const  divCrearLibro = document.getElementById('divCrearLibro')
 
     
         //Creamos las vistas 
@@ -28,6 +32,8 @@ export class Controlador {
         this.vistas.set(Vista.vlistarautor, new ListarAutor(this, divListarAutor))
         this.vistas.set(Vista.vmodificarautor, new ModificarAutor(this, divModificarAutor))
         this.vistas.set(Vista.vmodificarlibro, new ModificarLibro (this, divModificarLibro))
+        this.vistas.set(Vista.vcrearautor, new CrearAutor(this, divCrearAutor))
+        this.vistas.set(Vista.vcrearlibro, new CrearLibro (this, divCrearLibro))
 
         
         this.verVista(Vista.vmenuinicial)
@@ -55,6 +61,7 @@ export class Controlador {
 
     async pulsarAutor(){
         await this.modelo.mostrarAutor()
+        this.vistas.get(Vista.vlistarautor).visualizarAutor()
         this.verVista(Vista.vlistarautor)
        
     }

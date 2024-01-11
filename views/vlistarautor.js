@@ -7,20 +7,20 @@ export class ListarAutor extends Vista {
         this.datos = new Modelo();
     }
 
-    async visualizarLibro() {
-        const obras = await this.datos.mostrarObra();
+    async visualizarAutor() {
+        const autores = await this.datos.mostrarAutor();
 
-        if (obras) {
-            const divListarLibro = document.getElementById('divListarLibro');
-            divListarLibro.innerHTML = ''; // Limpiamos el contenido actual
+        if (autores) {
+            const divListarAutor = document.getElementById('divListarAutor');
+            divListarAutor.innerHTML = ''; // Limpiamos el contenido actual
 
-            obras.forEach((obra) => {
-                const obraElement = document.createElement('div');
-                obraElement.textContent = `Título: ${obra.titulo}, Autor: ${obra.autor}, Año: ${obra.anio}`;
-                divListarLibro.appendChild(obraElement);
+            autores.forEach((autor) => {
+                const autoresDiv = document.createElement('div');
+                autoresDiv.textContent = `Nombre: ${autor.nombre}, Fecha Nacimiento: ${autor.fecha_nacimiento}, Fecha Muerte: ${autor.fecha_muerte}, Nacionalidad: ${autor.nacionalidad}, Foto: ${autor.foto}`;
+                divListarAutor.appendChild(autoresDiv);
             });
         } else {
-            console.log('No se pudo obtener la lista de obras');
+            console.log('No se pudo obtener la lista de Autores');
         }
     }
 }
