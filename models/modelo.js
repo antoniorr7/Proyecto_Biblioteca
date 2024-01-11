@@ -1,4 +1,5 @@
 import { Rest } from "../service/rest.js";
+
 export class Modelo {
     constructor () {
       this.rest = new Rest()
@@ -11,6 +12,7 @@ export class Modelo {
           return autores
       } else {
           console.log('No se pudo obtener la lista de autores')
+          return null
       }
   }
   async mostrarObra() {
@@ -18,8 +20,10 @@ export class Modelo {
 
       if (obra) {
           console.log('Lista de obras:', obra)
+          return obra
       } else {
           console.log('No se pudo obtener la lista de obras')
+          return null
       }
   }
   }

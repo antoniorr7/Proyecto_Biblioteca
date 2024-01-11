@@ -1,10 +1,10 @@
-import { Modelo } from './models/modelo.js'
-import { MenuInicial } from './views/vmenuinicial.js'
-import { ModificarLibro } from './views/vmodificarlibro.js'
-import { ModificarAutor } from './views/vmodificarautor.js'
-import { ListarAutor } from './views/vlistarautor.js'
-import { ListarLibro } from './views/vlistarlibro.js'
-import { Vista } from './views/vista.js'
+import { Modelo } from './models/modelo.js';
+import { MenuInicial } from './views/vmenuinicial.js';
+import { ModificarLibro } from './views/vmodificarlibro.js';
+import { ModificarAutor } from './views/vmodificarautor.js';
+import { ListarAutor } from './views/vlistarautor.js';
+import { ListarLibro } from './views/vlistarlibro.js';
+import { Vista } from './views/vista.js';
 
 export class Controlador {
     vistas = new Map()
@@ -46,14 +46,16 @@ export class Controlador {
         this.verVista(Vista.vmenuinicial)
     }
 
-    pulsarLibro(){
+    async pulsarLibro() {
+        await this.modelo.mostrarObra()
+        this.vistas.get(Vista.vlistarlibro).visualizarLibro()
         this.verVista(Vista.vlistarlibro)
-        this.modelo.mostrarObra()
     }
+    
 
-    pulsarAutor(){
+    async pulsarAutor(){
+        await this.modelo.mostrarAutor()
         this.verVista(Vista.vlistarautor)
-        this.modelo.mostrarAutor();
        
     }
 
