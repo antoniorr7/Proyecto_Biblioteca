@@ -4,35 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROYECTO BIBLIOTECA</title>
-    <style>
-        nav {
-            display: flex;
-            justify-content: space-between;
-            background-color: #eee;
-            padding: 10px;
-        }
-        button {
-            border: none;
-            background: none;
-            cursor: pointer;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        td, th {
-            border: 1px solid #dddddd;
-            padding: 8px;
-            text-align: left;
-        }
-        tr:nth-child(odd) {
-            background-color: #f9f9f9;
-        }
-    </style>
+    <link rel="stylesheet" href="css/FanLib.css">
 </head>
 <body>
     <nav>
@@ -45,22 +17,27 @@
         MENU INICIAL
     </div>
     <div id="divListarLibro">
-        LISTAR LIBROS
+        
     </div>
     <div id="divListarAutor">
-        LISTAR AUTORES
-        <button id="btnCrear">CREAR AUTOR</button>
-        <table id="tabla_autores" class="tabla_libros_D">
-            <tr class="filas_D">
-                <td>Nombre</td>
-                <td>Fecha Nacimiento</td>
-                <td>Fecha Muerte</td>
-                <td>Foto</td>
-                <td>Nacionalidad</td>
-                <td>Borrar</td>
-                <td>Editar</td>
-            </tr>
-        </table>
+        <div id="scroll">
+                <table class="tabla">
+                    <tr>
+                        <td class="imagen-columna">
+                            <a href="autor.html"><img src="imagenes/PromoHP7_Harry_Potter.webp"
+                                    alt="Descripción de la imagen"></a>
+                            <a href="autor.html"><span class="nombre-autor">Autor</span></a>
+                        </td>
+                        <td class="editor-columna">
+                            <a href="formulario-autores.html"><img src="imagenes/lapiz.png" alt="Editar autor"
+                                    class="editor"></a>
+                            <a href=""><img src="imagenes/papelera.png" alt="Eliminar autor" class="editor"></a>
+                        </td>
+                    </tr>
+            
+                </table>
+                <img id="btnCrear" src="imagenes/283344d6-781d-4726-af0d-8fb8030bc3ca.png">
+        </div>
     </div>
     <div id="divCrearAutor">
         CREAR AUTOR
