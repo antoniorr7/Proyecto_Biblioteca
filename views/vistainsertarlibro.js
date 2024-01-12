@@ -1,6 +1,6 @@
 import { Vista } from './vista.js'
 
-export class CrearAutor extends Vista {
+export class VistaInsertarLibro extends Vista {
 
   constructor (controlador, base) {
     super(controlador, base)

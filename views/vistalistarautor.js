@@ -1,10 +1,13 @@
 import { Vista } from './vista.js';
 import { Modelo } from '../models/modelo.js';
 
-export class ListarAutor extends Vista {
+export class VistaListarAutor extends Vista {
     constructor(controlador, base) {
         super(controlador, base);
         this.datos = new Modelo();
+
+        const crear = document.getElementById('btnCrear')
+        crear.onclick = this.pulsarCrear.bind(this)
     }
 
     async visualizarAutor() {
@@ -12,7 +15,6 @@ export class ListarAutor extends Vista {
     
         if (autores) {
             const tablaAutores = document.getElementById('tabla_autores');
-            tablaAutores.innerHTML = ''; // Limpiamos el contenido actual
     
             autores.forEach((autor) => {
                 const filaAutor = document.createElement('tr');
@@ -53,7 +55,10 @@ export class ListarAutor extends Vista {
             });
         } else {
             console.log('No se pudo obtener la lista de Autores');
-        }
+        }    
     }
     
+    async pulsarCrear() {
+        this.controlador.verVista(Vista.vistainsertarautor)
+    }
 }

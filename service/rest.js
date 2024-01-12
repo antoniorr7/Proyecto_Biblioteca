@@ -1,7 +1,7 @@
 export class Rest {
     constructor() {
         this.baseUrl = 'https://migueljaque.com/fanlib/v1';
-        this.token = 'testToken';
+        this.token = 's9bjpJIw6Q';
         this.headers = {
             'Fanlibtoken': this.token,
             'Content-Type': 'application/json'

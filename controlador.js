@@ -1,11 +1,9 @@
-import { Modelo } from './models/modelo.js';
-import { MenuInicial } from './views/vmenuinicial.js';
-import { ModificarLibro } from './views/vmodificarlibro.js';
-import { ModificarAutor } from './views/vmodificarautor.js';
-import { ListarAutor } from './views/vlistarautor.js';
-import { ListarLibro } from './views/vlistarlibro.js';
-import { CrearAutor } from './views/vcrearautor.js';
-import { CrearLibro } from './views/vcrearlibro.js';
+import { Modelo } from './models/modelo.js'
+import { MenuInicial } from './views/vmenuinicial.js'
+import { VistaListarAutor } from './views/vistalistarautor.js'
+import { VistaListarLibro } from './views/vistalistarlibro.js'
+import { VistaInsertarAutor } from './views/vistainsertarautor.js'
+import { VistaInsertarLibro } from './views/vistainsertarlibro.js'
 import { Vista } from './views/vista.js';
 
 export class Controlador {
@@ -20,20 +18,16 @@ export class Controlador {
         const divMenuInicial = document.getElementById('divMenuInicial')
         const divListarAutor = document.getElementById('divListarAutor')
         const divListarLibro = document.getElementById('divListarLibro')
-        const divModificarAutor = document.getElementById('divModificarAutor')
-        const  divModificarLibro= document.getElementById('divModificarLibro')
         const divCrearAutor = document.getElementById('divCrearAutor')
         const  divCrearLibro = document.getElementById('divCrearLibro')
 
     
         //Creamos las vistas 
         this.vistas.set(Vista.vmenuinicial, new MenuInicial(this, divMenuInicial))
-        this.vistas.set(Vista.vlistarlibro, new ListarLibro(this, divListarLibro))
-        this.vistas.set(Vista.vlistarautor, new ListarAutor(this, divListarAutor))
-        this.vistas.set(Vista.vmodificarautor, new ModificarAutor(this, divModificarAutor))
-        this.vistas.set(Vista.vmodificarlibro, new ModificarLibro (this, divModificarLibro))
-        this.vistas.set(Vista.vcrearautor, new CrearAutor(this, divCrearAutor))
-        this.vistas.set(Vista.vcrearlibro, new CrearLibro (this, divCrearLibro))
+        this.vistas.set(Vista.vistalistarlibro, new VistaListarLibro(this, divListarLibro))
+        this.vistas.set(Vista.vistalistarautor, new VistaListarAutor(this, divListarAutor))
+        this.vistas.set(Vista.vistainsertarautor, new VistaInsertarAutor(this, divCrearAutor))
+        this.vistas.set(Vista.vistainsertarlibro, new VistaInsertarLibro (this, divCrearLibro))
 
         
         this.verVista(Vista.vmenuinicial)
@@ -54,15 +48,15 @@ export class Controlador {
 
     async pulsarLibro() {
         await this.modelo.mostrarObra()
-        this.vistas.get(Vista.vlistarlibro).visualizarLibro()
-        this.verVista(Vista.vlistarlibro)
+        this.vistas.get(Vista.vistalistarlibro).visualizarLibro()
+        this.verVista(Vista.vistalistarlibro)
     }
     
 
     async pulsarAutor(){
         await this.modelo.mostrarAutor()
-        this.vistas.get(Vista.vlistarautor).visualizarAutor()
-        this.verVista(Vista.vlistarautor)
+        this.vistas.get(Vista.vistalistarautor).visualizarAutor()
+        this.verVista(Vista.vistalistarautor)
        
     }
 

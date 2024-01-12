@@ -11,11 +11,26 @@
             background-color: #eee;
             padding: 10px;
         }
-
         button {
             border: none;
             background: none;
             cursor: pointer;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        td, th {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(odd) {
+            background-color: #f9f9f9;
         }
     </style>
 </head>
@@ -34,6 +49,7 @@
     </div>
     <div id="divListarAutor">
         LISTAR AUTORES
+        <button id="btnCrear">CREAR AUTOR</button>
         <table id="tabla_autores" class="tabla_libros_D">
             <tr class="filas_D">
                 <td>Nombre</td>
@@ -45,38 +61,34 @@
                 <td>Editar</td>
             </tr>
         </table>
-        
     </div>
     <div id="divCrearAutor">
         CREAR AUTOR
         <h2>Formulario de Autor</h2>
-        <form style="max-width: 400px; margin: 0 auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-            <label style="display: block; margin-bottom: 10px;">Nombre:</label>
-            <input type="text" name="nombre" value="${autor.nombre}" style="width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;" required>
+        <form id="formularioAutor">
+            <label>Nombre:</label>
+            <input type="text" name="nombre" required>
+        
+            <label>Fecha Nacimiento:</label>
+            <input type="date" name="fechaNacimiento" required>
+        
+            <label>Fecha Muerte:</label>
+            <input type="date" name="fechaMuerte">
+        
+            <label>Biografia:</label>
+            <input type="text" name="biografia" required>
+        
+            <label>Foto:</label>
+            <input type="file" name="foto" accept="image/*">
 
-            <label style="display: block; margin-bottom: 10px;">Fecha Nacimiento:</label>
-            <input type="date" name="fecha_nacimiento" value="${autor.fecha_nacimiento}" style="width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;" required>
-
-            <label style="display: block; margin-bottom: 10px;">Fecha Muerte:</label>
-            <input type="date" name="fecha_muerte" value="${autor.fecha_muerte}" style="width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;">
-
-            <label style="display: block; margin-bottom: 10px;">Nacionalidad:</label>
-            <input type="text" name="nacionalidad" value="${autor.nacionalidad}" style="width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;" required>
-
-            <label style="display: block; margin-bottom: 10px;">Foto:</label>
-            <input type="file" name="foto" accept="image/*" style="width: 100%; padding: 8px; margin-bottom: 15px; box-sizing: border-box;">
-
-            <button type="submit" style="background-color: #4caf50; color: #fff; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">Enviar</button>
-        </form>
+            <label>Nacionalidad:</label>
+            <input type="text" name="nacionalidad" required>
+        
+            <button type="submit" id="btnEnviar">Enviar</button>
+        </form>        
     </div>
     <div id="divCrearLibro">
         CREAR LIBRO
-    </div>
-    <div id="divModificarLibro">
-        MODIFICAR LIBROS
-    </div>
-    <div id="divModificarAutor">
-        MODIFICAR LIBROS
     </div>
     <script type="module" src="controlador.js"></script>
 </body>
