@@ -15,10 +15,11 @@ export class VistaListarLibro extends Vista {
             divListarLibro.innerHTML = ''
 
             obras.forEach((obra) => {
-                const obraElement = document.createElement('div')
-                obraElement.textContent = `Título: ${obra.titulo}`
-                divListarLibro.appendChild(obraElement)
+                const obraElement = document.createElement('div');
+                obraElement.textContent = `Título: ${obra.titulo} | Fecha Publicacion: ${obra.fecha_publicacion} | Reseña: ${obra.reseña} | Género: ${obra.genero}`;
+                divListarLibro.appendChild(obraElement);
             });
+            
         } else {
             console.log('No se pudo obtener la lista de obras')
         }

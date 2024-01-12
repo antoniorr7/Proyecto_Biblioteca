@@ -54,10 +54,12 @@ export class Controlador {
     
 
     async pulsarAutor(){
-        await this.modelo.mostrarAutor()
-        this.vistas.get(Vista.vistalistarautor).visualizarAutor()
+        if (!this.autoresMostrados) {  // Verificar si la lista de autores ya se ha mostrado
+            await this.modelo.mostrarAutor()
+            this.vistas.get(Vista.vistalistarautor).visualizarAutor()
+            this.autoresMostrados = true;  // Establecer la bandera a true después de mostrar la lista
+        }
         this.verVista(Vista.vistalistarautor)
-       
     }
 
    
