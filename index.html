@@ -161,46 +161,40 @@
     </div>
     <div id="divCrearLibro">
         CREAR Libro
-       
+      
         <form id="formularioLibro">
-            <label>ID:</label>
-            <input type="number" name="id" required>
-        
-            <label>Título:</label>
-            <input type="text" name="titulo" required>
-        
-            <label>ID del Autor:</label>
-            <input type="number" name="idAutor" required>
-        
-            <label>Fecha de Publicación:</label>
-            <input type="date" name="fechaPublicacion" required>
-        
-            <label>Reseña:</label>
-            <textarea name="resena" rows="4" required></textarea>
-        
-            <label>Portada:</label>
-            <input type="file" name="portada" accept="image/*">
-        
-            <label>Autores Influidos:</label>
-            <input type="text" name="autoresInfluidos">
-        
-            <label>Género:</label>
-            <select name="genero" required>
-                <option value="Ficcion">Ficción</option>
-                <option value="NoFiccion">No Ficción</option>
-                <option value="Aventura">Aventura</option>
-                <option value="Misterio">Misterio</option>
-                <option value="CienciaFiccion">Ciencia Ficción</option>
-                <option value="Romance">Romance</option>
-                <option value="Historico">Histórico</option>
-                <!-- Agrega más opciones según tus necesidades -->
-            </select>
-            
-            <button type="submit" id="btnEnviar">Enviar</button>
+          <label>Título:</label>
+          <input type="text" name="titulo" required>
+      
+          <label>Autor:</label>
+          <select name="autor" required>
+                <option value="prueba">Elige un Autor</option>
+          </select>
+      
+          <label>Fecha de Publicación:</label>
+          <input type="date" name="fecha_publicacion" required>
+      
+          <label>Reseña:</label>
+          <textarea name="reseña" rows="4" required></textarea>
+      
+          <label>Portada:</label>
+          <input type="file" name="portada" accept="image/*">
+      
+          <label>Género:</label>
+          <select name="genero" required>
+            <option value="Ficcion">Ficción</option>
+            <option value="NoFiccion">No Ficción</option>
+            <option value="Aventura">Aventura</option>
+            <option value="Misterio">Misterio</option>
+            <option value="CienciaFiccion">Ciencia Ficción</option>
+            <option value="Romance">Romance</option>
+            <option value="Historico">Histórico</option>
+          </select>
+      
+          <button type="submit" id="btnEnviar">Enviar</button>
         </form>
-        
-        
-    </div>
+      </div>
+      
     <script type="module" src="controlador.js"></script>
 </body>
 

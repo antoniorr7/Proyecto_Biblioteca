@@ -1,0 +1,38 @@
+{
+    "campos": {
+        "Autor": {
+            "id": "SQLITE3_INTEGER",
+            "nombre": "SQLITE3_TEXT",
+            "fechaNacimiento": "SQLITE3_TEXT",
+            "fechaMuerte": "SQLITE3_TEXT",
+            "biografia": "SQLITE3_TEXT",
+            "foto": "SQLITE3_BLOB",
+            "nacionalidad": "SQLITE3_TEXT"
+        },
+        "obra": {
+            "id": "SQLITE3_INTEGER",
+            "titulo": "SQLITE3_TEXT",
+            "id_autor": "SQLITE3_INTEGER",
+            "fecha_publicacion": "SQLITE3_TEXT",
+            "reseña": "SQLITE3_TEXT",
+            "portada": "SQLITE3_BLOB",
+            "genero": "SQLITE3_TEXT"
+        }
+    },
+    "sentencias": {
+        "insertar_autor": "INSERT INTO Autor (nombre, fechaNacimiento, fechaMuerte, biografia, foto, nacionalidad) VALUES (:nombre, :fechaNacimiento, :fechaMuerte, :biografia, :foto, :nacionalidad);",
+        "listar_autores_basico": "SELECT * FROM Autor;",
+        "actualizar_autor": "UPDATE Autor SET nombre = :nuevoNombre, fechaNacimiento = :nuevaFechaNacimiento, fechaMuerte = :nuevaFechaMuerte, biografia = :nuevaBiografia, foto = :nuevaFoto, nacionalidad = :nuevaNacionalidad WHERE id = :id_autor;",
+        "borrar_autor": "DELETE FROM Autor WHERE id = :id_autor;",
+        "listar_autores_avanzado": "SELECT id, nombre, fechaNacimiento, fechaMuerte, biografia, nacionalidad FROM Autor;",
+        "borrar_autor_libro": "DELETE FROM Autor_Libro WHERE id_autor = :id_autor;",
+        "insertar_libro_autor": "INSERT INTO Autor_Libro (id_autor, id_libro) VALUES (:id_autor, :idLibro);",
+        "insertar_obra": "INSERT INTO Libro (titulo, id_autor, fecha_publicacion, reseña, portada, genero) VALUES (:titulo, :id_autor, :fechaPublicacion, :reseña, :portada, :genero);",
+        "listar_obras_basico": "SELECT titulo FROM libro;",
+        "actualizar_obra": "UPDATE libro SET titulo = :nuevoTitulo, id_autor = :nuevoid_autor, fecha_publicacion = :nuevaFechaPublicacion, reseña = :nuevaResena, portada = :nuevaPortada, genero = :nuevoGenero WHERE id = :idlibro;",
+        "borrar_obra": "DELETE FROM libro WHERE id = :idlibro;",
+        "listar_obras_avanzado": "SELECT id, titulo, id_autor, fecha_publicacion, reseña, genero FROM libro;"
+    }
+}
+
+   

@@ -39,7 +39,7 @@ export class VistaListarLibro extends Vista {
                     // Crear enlaces para la papelera y el lápiz
                     const papeleraLink = document.createElement('a');
                     papeleraLink.href = '';
-                    papeleraLink.innerHTML = `<img id="papelera" src="imagenes/papelera.png" alt="Borrar">`;
+                    papeleraLink.innerHTML = `<img id="papelera" src="imagenes/basura.png" alt="Borrar">`;
     
                     const lapizLink = document.createElement('a');
                     lapizLink.href = 'formulario-libros.html';
