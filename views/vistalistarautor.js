@@ -84,8 +84,6 @@ export class VistaListarAutor extends Vista {
         }
     }
     
-    
-    
     async pulsarCrear() {
         this.controlador.verVista(Vista.vistainsertarautor)
     }
