@@ -6,7 +6,7 @@ export class VistaListarAutor extends Vista {
         super(controlador, base);
         this.datos = new Modelo();
 
-        const crear = document.getElementById('btnCrear')
+        const crear = document.getElementById('añadir-autor')
         crear.onclick = this.pulsarCrear.bind(this)
     }
 

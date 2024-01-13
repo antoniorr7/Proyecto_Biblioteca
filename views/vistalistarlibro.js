@@ -5,6 +5,9 @@ export class VistaListarLibro extends Vista {
     constructor(controlador, base) {
         super(controlador, base);
         this.datos = new Modelo();
+
+        const crear = document.getElementById('crearLibro')
+        crear.onclick = this.pulsarCrear.bind(this)
     }
 
     async visualizarLibro() {
@@ -61,5 +64,7 @@ export class VistaListarLibro extends Vista {
             console.error('Error al visualizar los libros:', error);
         }
     }
-    
+    async pulsarCrear() {
+        this.controlador.verVista(Vista.vistainsertarlibro)
+    }
 }
