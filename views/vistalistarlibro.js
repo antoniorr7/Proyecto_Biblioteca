@@ -13,6 +13,7 @@ export class VistaListarLibro extends Vista {
         if (obras) {
             const divListarLibro = document.getElementById('divListarLibro');
             divListarLibro.innerHTML = '';
+            
 
             obras.forEach((obra) => {
                 // Crear un nuevo elemento h3 para cada obra

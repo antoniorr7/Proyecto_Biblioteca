@@ -14,7 +14,6 @@ export class VistaListarAutor extends Vista {
         const autores = await this.datos.mostrarAutor();
     
         if (autores) {
-            const divListarAutor = document.getElementById('divListarAutor');
             const scrollDiv = document.getElementById('scroll');
     
             // Limpiar la tabla existente
@@ -80,11 +79,11 @@ export class VistaListarAutor extends Vista {
             });
     
             scrollDiv.appendChild(tablaAutores);
-            divListarAutor.appendChild(scrollDiv);
         } else {
             console.log('No se pudo obtener la lista de Autores');
         }
     }
+    
     
     
     async pulsarCrear() {

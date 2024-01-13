@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página web recopilatoria de libros de fantasía y autores">
+    <meta name="author" content="Diego Leiva">
+    <title>FanLib</title>
+    <link rel="stylesheet" href="FanLib.css">
+</head>
+
+<body class="body-form-libros">
+    <!-- Barra de navegación -->
+    <div id="Contenedor">
+        <div id="Encabezado">
+            <a href="index.html"><img id="logo" src="imagenes/logo.png" alt="Indice"></a>
+            <div class="opcion"> <a href="lista-autores.html"> Autores</a> </div>
+            <div class="opcion"> <a href="lista-libros.html"> Libros</a> </div>
+            <div id="busquedad">
+                <input id="buscador" type="text" placeholder="Buscar...">
+                <div>
+                    <a href=""><img id="lupa" src="imagenes/lupa.png" alt="Buscar"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabla de autores -->
+    <div class="titulo-form">
+        <h1>Formulario Autores</h1>
+    </div>
+
+    <div id="Cuerpo">
+        <div id="formulario">
+            <form action="" method="get">
+                <div class="marco-autores">
+                    <div class="espacio">
+                        <label for="titulo">Nombre de Autor:</label>
+                        <input type="text" name="titulo" id="titulo" class="borde" size="20" maxlength="20">
+                    </div>
+                </div>
+
+                <div class="marco-autores">
+                    <div class="espacio">
+                        <label for="fecha_pub">Fecha de nacimiento:</label>
+                        <input type="date" name="fecha" id=”fecha” class="borde">
+                    </div>
+                </div>
+
+                <div class="marco-autores">
+                    <div class="espacio">
+                        <label for="fecha_pub">Fecha de fallecimiento:</label>
+                        <input type="date" name="fecha" id=”fecha” class="borde">
+                    </div>
+                </div>
+
+                <div class="marco-autores">
+                    <div id="nacionalidad" class="espacio">
+                        <label for="nacionalidad">
+                            Nacionalidad
+                        </label>
+                        <datalist id="nacionalidades">
+                            <select name="nacionalidades">
+                                <option value="Español">Español</option>
+                                <option value="Francés">Francés</option>
+                                <option value="Chino">Chino</option>
+                                <option value="Gitano">Gitano</option>
+                            </select>
+                        </datalist>
+
+                        <input id="nacionalidad" name="nacionalidad" list="nacionalidades" class="borde">
+                    </div>
+                </div>
+
+                <div class="marco-autores">
+                    <div id="biografia" class="espacio">
+                        <label for="texto">Biografía:</label>
+                        <textarea rows="2" cols="40" name="texto" id="texto_desc" class="borde"></textarea><br>
+                    </div>
+                </div>
+
+                <div class="marco-autores">
+                    <div id="retrato" class="espacio">
+                        Retrato Autor:
+                        <input type="file" name="archivo" class="borde">
+                    </div>
+                </div>
+
+                <div class="marco-autores">
+                    <div id="obras" class="espacio">
+                        <label for="titulo">Obras de Autor:</label>
+                        <input type="text" name="titulo" id="titulo" class="borde" size="20" maxlength="50">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Botón inferior -->
+    <a href="lista-autores.html">
+        <div id="botones">
+            <input type="submit" value="Guardar Datos" id="boton"><br>
+        </div>
+    </a>
+    </div>
+</body>
+
+</html>
