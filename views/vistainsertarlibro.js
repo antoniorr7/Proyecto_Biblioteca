@@ -1,10 +1,12 @@
 import { Vista } from './vista.js';
 import { Rest } from '../service/rest.js';
+import { ModeloObra } from '../models/modeloobra.js';
 
 export class VistaInsertarLibro extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
     this.rest = new Rest();
+    this.modeloobra = new ModeloObra();
 
     // Asignar el evento al formulario del libro
     const formularioLibro = document.getElementById('formularioLibro');
@@ -38,12 +40,7 @@ export class VistaInsertarLibro extends Vista {
       genero: document.getElementsByName('genero')[0].value,
     };
 
-    const respuesta = await this.rest.crearObra(libroData);
+    await this.modeloobra.insertarObra(libroData);
 
-    if (respuesta) {
-      console.log('Libro creado exitosamente:', respuesta);
-    } else {
-      console.error('Hubo un error al crear el libro.');
-    }
   }
 }

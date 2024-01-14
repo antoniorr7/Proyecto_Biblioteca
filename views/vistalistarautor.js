@@ -1,10 +1,10 @@
 import { Vista } from './vista.js';
-import { Modelo } from '../models/modelo.js';
+import { ModeloAutor } from '../models/modeloautor.js';
 
 export class VistaListarAutor extends Vista {
     constructor(controlador, base) {
         super(controlador, base);
-        this.datos = new Modelo();
+        this.datos = new ModeloAutor();
 
         const crear = document.getElementById('añadir-autor')
         crear.onclick = this.pulsarCrear.bind(this)

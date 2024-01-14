@@ -1,4 +1,5 @@
-import { Modelo } from './models/modelo.js'
+import { ModeloObra } from './models/modeloobra.js'
+import { ModeloAutor } from './models/modeloautor.js'
 import { MenuInicial } from './views/vmenuinicial.js'
 import { VistaListarAutor } from './views/vistalistarautor.js'
 import { VistaListarLibro } from './views/vistalistarlibro.js'
@@ -11,7 +12,8 @@ export class Controlador {
    
 
     constructor() {
-        this.modelo = new Modelo()
+        this.modeloobra = new ModeloObra()
+        this.modeloautor = new ModeloAutor()
         
 
         //conseguimos la referencia de la interface
@@ -47,7 +49,7 @@ export class Controlador {
     }
 
     async pulsarLibro() {
-        await this.modelo.mostrarObra()
+        await this.modeloobra.mostrarObra()
         this.vistas.get(Vista.vistalistarlibro).visualizarLibro()
         this.verVista(Vista.vistalistarlibro)
     }
@@ -55,7 +57,7 @@ export class Controlador {
 
     async pulsarAutor(){
         if (!this.autoresMostrados) {  // Verificar si la lista de autores ya se ha mostrado
-            await this.modelo.mostrarAutor()
+            await this.modeloautor.mostrarAutor()
             this.vistas.get(Vista.vistalistarautor).visualizarAutor()
             this.autoresMostrados = true;  // Establecer la bandera a true después de mostrar la lista
         }
