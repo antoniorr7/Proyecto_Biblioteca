@@ -8,7 +8,7 @@ export class ModeloAutor {
       const autores = await this.rest.getAutor()
 
       if (autores) {
-          console.log('Lista de autores:', autores)
+          console.log('LISTA AUTORES:', autores)
           return autores
       } else {
           console.log('No se pudo obtener la lista de autores')
@@ -24,6 +24,17 @@ export class ModeloAutor {
             return await this.mostrarAutor();
         } else {
             console.error('Hubo un error al crear el autor.');
+            return null;
+        }
+    }
+    async borrarAutor(id){
+        console.log('este es el id '+ id)
+        const respuesta = await this.rest.borrarAutor(id)
+        
+        if (respuesta) {
+            console.log('Autor borrado exitosamente:', respuesta);
+        } else {
+            console.error('Hubo un error al borrar el autor.');
             return null;
         }
     }

@@ -9,29 +9,21 @@
 </head>
 
 <body>
-    <nav>
-        <button id="btnInicio">MENU INICIAL</button>
-        <button id="btnLibro">LISTAR LIBROS</button>
-        <button id="btnAutor">LISTAR AUTORES</button>
-
-    </nav>
-    <div id="divMenuInicial">
-        <div class="body-index">
-            <!-- Barra de navegación -->
-            <div id="Contenedor">
-                <div id="Encabezado">
-                    <a href="index.html"><img id="logo"  src="class/Proyecto/imagenes/logo.png" alt="Indice"></a>
-                    <div class="opcion"> <a href="lista-autores.html"> Autores</a> </div>
-                    <div class="opcion"> <a href="lista-libros.html"> Libros</a> </div>
-                    <div id="busquedad">
-                        <input id="buscador" type="text" placeholder="Buscar...">
-                        <div>
-                            <a href=""><img id="lupa" src="class/Proyecto/imagenes/lupa.png" alt="Buscar"></a>
-                        </div>
+    <div class="body-index">
+        <div id="Contenedor">
+            <div id="Encabezado">
+                <button id="btnInicio"><img id="logo"  src="class/Proyecto/imagenes/logo.png" alt="Indice"></button>
+                <div class="opcion"> <button id="btnAutor"> Autores</button> </div>
+                <div class="opcion"> <button id="btnLibro"> Libros</button> </div>
+                <div id="busquedad">
+                    <input id="buscador" type="text" placeholder="Buscar...">
+                    <div>
+                        <a href=""><img id="lupa" src="class/Proyecto/imagenes/lupa.png" alt="Buscar"></a>
                     </div>
                 </div>
             </div>
-
+        </div>
+    <div id="divMenuInicial">
             <!-- Cuerpo -->
             <div id="gif">
                 <a href="info.html"><img src="class/Proyecto/imagenes/Yg6I.gif"></a>
@@ -40,21 +32,6 @@
     </div>
     <div id="divListarLibro">
         <div class="body-libros">
-            <!-- Barra de navegación -->
-            <div id="Contenedor">
-                <div id="Encabezado">
-                    <a href="index.html"><img id="logo"  src="class/Proyecto/imagenes/logo.png" alt="Indice"></a>
-                    <div class="opcion"> <a href="lista-autores.html"> Autores</a> </div>
-                    <div class="opcion"> <a href="lista-libros.html"> Libros</a> </div>
-                    <div id="busquedad">
-                        <input id="buscador" type="text" placeholder="Buscar...">
-                        <div>
-                            <a href=""><img id="lupa" src="class/Proyecto/imagenes/lupa.png" alt="Buscar"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Tarjetas de libros -->
             <div id="cuerpo">
                 <div class="titulo">
@@ -73,12 +50,7 @@
                             </div>
                         </a>
                     </div>
-
-
-
                 </div>
-
-
             </div>
             <img src="class/Proyecto/imagenes/an╠âadir.png" id="crearLibro"><br>
         </div>
@@ -86,21 +58,6 @@
     <div id="divListarAutor">
 
         <div class="body-autores">
-            <!-- Barra de navegación -->
-            <div id="Contenedor">
-                <div id="Encabezado">
-                    <a href="index.html"><img id="logo"  src="class/Proyecto/imagenes/logo.png" alt="Indice"></a>
-                    <div class="opcion"> <a href="lista-autores.html"> Autores</a> </div>
-                    <div class="opcion"> <a href="lista-libros.html"> Libros</a> </div>
-                    <div id="busquedad">
-                        <input id="buscador" type="text" placeholder="Buscar...">
-                        <div>
-                            <a href=""><img id="lupa" src="class/Proyecto/imagenes/lupa.png" alt="Buscar"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Tabla de autores -->
             <h1>Autores</h1>
 
@@ -115,7 +72,7 @@
                         <td class="editor-columna">
                             <a href="formulario-autores.html"><img src="class/Proyecto/imagenes/lapiz.png"
                                     alt="Editar autor" class="editor"></a>
-                            <a href=""><img src="class/Proyecto/imagenes/papelera.png" alt="Eliminar autor"
+                            <a href=""><img id="papelera" src="class/Proyecto/imagenes/papelera.png" alt="Eliminar autor"
                                     class="editor"></a>
                         </td>
                     </tr>

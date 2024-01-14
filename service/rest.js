@@ -73,6 +73,7 @@ export class Rest {
     }
 
     async borrarAutor(id) {
+        console.log('rest: ' + id)
         try {
             const url = `${this.baseUrl}/autor/${id}`;
             const response = await fetch(url, {
