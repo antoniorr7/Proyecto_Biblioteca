@@ -18,14 +18,25 @@ export class ModeloObra {
 
     
     async insertarObra(obraData) {
-      const respuesta = await this.rest.crearObra(obraData);
+        const respuesta = await this.rest.crearObra(obraData);
 
+        if (respuesta) {
+            console.log('Obra creado exitosamente:', respuesta);
+            return await this.mostrarAutor();
+        } else {
+            console.error('Hubo un error al crear el autor.');
+            return null;
+        }
+    }
+
+    async borrarObra(id){
+      const respuesta = await this.rest.borrarObra(id)
+      
       if (respuesta) {
-          console.log('Obra creado exitosamente:', respuesta);
-          return await this.mostrarAutor();
+          console.log('Obra borrado exitosamente:', respuesta);
       } else {
-          console.error('Hubo un error al crear el autor.');
+          console.error('Hubo un error al borrar la obra.');
           return null;
       }
-  }
+    }
   }

@@ -37,17 +37,26 @@ export class VistaListarLibro extends Vista {
                     obraElement.textContent = `Título: ${obra.titulo}`;
     
                     // Crear enlaces para la papelera y el lápiz
-                    const papeleraLink = document.createElement('a');
-                    papeleraLink.href = '';
-                    papeleraLink.innerHTML = `<img id="papelera" src="imagenes/basura.png" alt="Borrar">`;
-    
+                    
+                    const eliminarObra = document.createElement('img');
+                    eliminarObra.src = 'imagenes/papelera.png';
+                    eliminarObra.alt = 'Eliminar Obra';
+                    eliminarObra.id = 'papelera';
+                    eliminarObra.classList.add('editor');
+
+                    // Añadir un manejador de eventos al hacer clic en la papelera
+                    eliminarObra.onclick = () =>{
+                        console.log(obra.id)
+                        this.pulsarBorrar(obra.id);
+                    } 
+                        
                     const lapizLink = document.createElement('a');
                     lapizLink.href = 'formulario-libros.html';
                     lapizLink.innerHTML = `<img id="lapiz" src="imagenes/lapiz.png" alt="Editar">`;
     
                     // Agregar elementos al cardContent
                     cardContent.appendChild(obraElement);
-                    cardContent.appendChild(papeleraLink);
+                    cardContent.appendChild(eliminarObra);
                     cardContent.appendChild(lapizLink);
     
                     // Agregar elementos al cardElement
@@ -66,5 +75,11 @@ export class VistaListarLibro extends Vista {
     }
     async pulsarCrear() {
         this.controlador.verVista(Vista.vistainsertarlibro)
+    }
+
+    async pulsarBorrar(idObra) {
+        // Llamar al método borrarAutor con el id del autor
+        console.log("idObra: " + idObra)
+        await this.datos.borrarObra(idObra);
     }
 }

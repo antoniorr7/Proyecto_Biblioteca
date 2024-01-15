@@ -28,7 +28,6 @@ export class ModeloAutor {
         }
     }
     async borrarAutor(id){
-        console.log('este es el id '+ id)
         const respuesta = await this.rest.borrarAutor(id)
         
         if (respuesta) {
