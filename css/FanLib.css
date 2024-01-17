@@ -1,6 +1,8 @@
 /* Cuerpo */
-.body-index {
+body{
     font-family: 'Browood-Regular';
+}
+.body-index {
     margin: 0;
     padding: 0;
     background: url(../imagenes/index.jpeg) center;
@@ -51,7 +53,7 @@
 
 @font-face {
     font-family: 'Browood-Regular';
-    src: url('browood/Browood-Regular.ttf') format('truetype');
+    src: url('Classyvogueregular.ttf') format('truetype');
     font-style: normal;
     font-weight: normal;
 }

@@ -9,11 +9,12 @@
 </head>
 
 <body>
+    <!----------------------------------------------------------------------------------------------------->
     <div class="body-index">
         <div id="Contenedor">
             <div id="Encabezado">
-                <button id="btnInicio"><img id="logo"  src="imagenes/logo.png" alt="Indice"></button>
-                <div> <button id="btnAutor"  class="opcion"> Autores</button> </div>
+                <button id="btnInicio"><img id="logo" src="imagenes/logo.png" alt="Indice"></button>
+                <div> <button id="btnAutor" class="opcion"> Autores</button> </div>
                 <div> <button id="btnLibro" class="opcion"> Libros</button> </div>
                 <div id="busquedad">
                     <input id="buscador" type="text" placeholder="Buscar...">
@@ -23,15 +24,16 @@
                 </div>
             </div>
         </div>
-    
+        <!----------------------------------------------------------------------------------------------------->
         <div id="divMenuInicial">
-                <!-- Cuerpo -->
-                <div id="gif">
-                    <a href="info.html"><img src="imagenes/Yg6I.gif"></a>
-                </div>
+            <!-- Cuerpo -->
+            <div id="gif">
+                <a href="info.html"><img src="imagenes/Yg6I.gif"></a>
             </div>
         </div>
     </div>
+    </div>
+    <!----------------------------------------------------------------------------------------------------->
     <div id="divListarLibro">
         <div class="body-libros">
             <!-- Tarjetas de libros -->
@@ -45,8 +47,7 @@
                             <img src="imagenes/111.jpg" alt="Descripción de la imagen">
                             <div class="card-content">
                                 <h3>Título del Libro</h3>
-                                <a href=""><img id="papelera" src="imagenes/papelera.png"
-                                        alt="Borrar"></a>
+                                <a href=""><img id="papelera" src="imagenes/papelera.png" alt="Borrar"></a>
                                 <a href="formulario-libros.html"><img id="lapiz" src="imagenes/lapiz.png"
                                         alt="Editar"></a>
                             </div>
@@ -57,6 +58,7 @@
             <img src="imagenes/añadir.png" id="crearLibro"><br>
         </div>
     </div>
+    <!----------------------------------------------------------------------------------------------------->
     <div id="divListarAutor">
 
         <div class="body-autores">
@@ -72,8 +74,8 @@
                             <a href="autor.html"><span class="nombre-autor">Autor</span></a>
                         </td>
                         <td class="editor-columna">
-                            <a href="formulario-autores.html"><img src="imagenes/lapiz.png"
-                                    alt="Editar autor" class="editor"></a>
+                            <a href="formulario-autores.html"><img src="imagenes/lapiz.png" alt="Editar autor"
+                                    class="editor"></a>
                             <a href=""><img id="papelera" src="imagenes/papelera.png" alt="Eliminar autor"
                                     class="editor"></a>
                         </td>
@@ -93,67 +95,157 @@
         </div>
 
     </div>
+    <!----------------------------------------------------------------------------------------------------->
     <div id="divCrearAutor">
-        CREAR AUTOR
-        <h2>Formulario de Autor</h2>
-        <form id="formularioAutor">
-            <label>Nombre:</label>
-            <input type="text" name="nombre" required>
+        <div class="body-form-libros">
+            <!-- Tabla de autores -->
+            <div class="titulo-form">
+                <h1>Formulario Autores</h1>
+            </div>
+            <div id="Cuerpo">
+                <div id="formulario">
+                    <form action="" method="get" id="formularioAutor">
+                        <div class="marco-autores">
+                            <div class="espacio">
+                                <label for="titulo">Nombre de Autor:</label>
+                                <input type="text" name="nombre" id="nombre" class="borde" size="20" maxlength="20">
+                            </div>
+                        </div>
 
-            <label>Fecha Nacimiento:</label>
-            <input type="date" name="fechaNacimiento" required>
+                        <div class="marco-autores">
+                            <div class="espacio">
+                                <label for="fecha_pub">Fecha de nacimiento:</label>
+                                <input type="date" name="fechaNacimiento" id=fechaNacimiento class="borde">
+                            </div>
+                        </div>
 
-            <label>Fecha Muerte:</label>
-            <input type="date" name="fechaMuerte">
+                        <div class="marco-autores">
+                            <div class="espacio">
+                                <label for="fecha_pub">Fecha de fallecimiento:</label>
+                                <input type="date" name="fechaMuerte" id=fechaMuerte class="borde">
+                            </div>
+                        </div>
 
-            <label>Biografia:</label>
-            <input type="text" name="biografia" required>
+                        <div class="marco-autores">
+                            <div id="nacionalidad" class="espacio">
+                                <label for="nacionalidad">
+                                    Nacionalidad
+                                </label>
+                                <datalist id="nacionalidades">
+                                    <select name="nacionalidades">
+                                        <option value="Español">Español</option>
+                                        <option value="Francés">Francés</option>
+                                        <option value="Chino">Chino</option>
+                                        <option value="Gitano">Gitano</option>
+                                    </select>
+                                </datalist>
 
-            <label>Foto:</label>
-            <input type="file" name="foto" accept="image/*">
+                                <input id="nacionalidad" name="nacionalidad" list="nacionalidades" class="borde">
+                            </div>
+                        </div>
 
-            <label>Nacionalidad:</label>
-            <input type="text" name="nacionalidad" required>
+                        <div class="marco-autores">
+                            <div id="biografia" class="espacio">
+                                <label for="texto">Biografía:</label>
+                                <textarea rows="2" cols="40" name="biografia" id="biografia"
+                                    class="borde"></textarea><br>
+                            </div>
+                        </div>
 
-            <button type="submit" id="btnEnviar">Enviar</button>
-        </form>
+                        <div class="marco-autores">
+                            <div id="retrato" class="espacio">
+                                Retrato Autor:
+                                <input type="file" name="foto" class="borde">
+                            </div>
+                        </div>
+
+                        <div class="marco-autores">
+                            <div id="obras" class="espacio">
+                                <label for="titulo">Obras de Autor:</label>
+                                <input type="text" name="titulo" id="titulo" class="borde" size="20" maxlength="50">
+                            </div>
+                        </div>
+                        <button type="submit" value="enviar" id="submit">
+                            enviar
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
     </div>
+    </div>
+    <!----------------------------------------------------------------------------------------------------->
+
+
     <div id="divCrearLibro">
-        CREAR Libro
-      
-        <form id="formularioLibro">
-          <label>Título:</label>
-          <input type="text" name="titulo" required>
-      
-          <label>Autor:</label>
-          <select name="autor" required>
-                <option value="prueba">Elige un Autor</option>
-          </select>
-      
-          <label>Fecha de Publicación:</label>
-          <input type="date" name="fecha_publicacion" required>
-      
-          <label>Reseña:</label>
-          <textarea name="reseña" rows="4" required></textarea>
-      
-          <label>Portada:</label>
-          <input type="file" name="portada" accept="image/*">
-      
-          <label>Género:</label>
-          <select name="genero" required>
-            <option value="Ficcion">Ficción</option>
-            <option value="NoFiccion">No Ficción</option>
-            <option value="Aventura">Aventura</option>
-            <option value="Misterio">Misterio</option>
-            <option value="CienciaFiccion">Ciencia Ficción</option>
-            <option value="Romance">Romance</option>
-            <option value="Historico">Histórico</option>
-          </select>
-      
-          <button type="submit" id="btnEnviar">Enviar</button>
-        </form>
-      </div>
-      
+        <div class="body-form-libros">
+            <div class="titulo-form">
+                <h1>Formulario Libros</h1>
+            </div>
+            <div id="Cuerpo">
+                <div id="formulario">
+                    <form action="" method="get" id="formularioLibro">
+                        <div class="marco">
+                            <div class="espacio-libros">
+                                <label>Título:</label>
+                                <input type="text" name="titulo" id="titulo" required>
+                            </div>
+                        </div>
+                        <div class="marco">
+                            <label>Autor:</label>
+                            <select name="autor" required>
+                                <option value="prueba">Elige un Autor</option>
+                            </select>
+                        </div>
+
+                        <div class="marco">
+                            <div class="espacio-libros">
+                                <label for="fecha_pub">Fecha de publicación:</label>
+                                <input type="date" name="fecha_publicacion" id="fecha" class="borde">
+                            </div>
+                        </div>
+
+                        <div class="marco">
+                            <div id="descripcion" class="espacio-libros">
+                                <label for="texto">Descripción:</label>
+                                <textarea rows="2" cols="40" name="texto" id="texto_desc" class="borde"></textarea><br>
+                            </div>
+                        </div>
+
+                        <div class="marco">
+                            <div id="portada" class="espacio-libros">
+                                Portada:
+                                <input type="file" name="portada" class="borde">
+                            </div>
+                        </div>
+                        <div class="marco">
+                            <div id="autoresInfluidos" class="espacio-libros">
+                                <label for="reseña">Reseña</label>
+                                <input type="text" name="reseña" id="reseña" class="borde" size="20" maxlength="50">
+                            </div>
+                        </div>
+
+                        <div class="marco">
+                            <label>genero:</label>
+                            <select name="genero" required>
+                                <option value="prueba">Elige un genero</option>
+                                <option value="terror">terror</option>
+                            </select>
+                        </div>
+                         <!-- Botón inferior -->
+        <button type="submit" value="enviar" id="submit">
+            enviar
+        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+    </div>
+    </div>
+
     <script type="module" src="controlador.js"></script>
 </body>
 

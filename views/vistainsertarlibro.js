@@ -11,6 +11,7 @@ export class VistaInsertarLibro extends Vista {
     // Asignar el evento al formulario del libro
     const formularioLibro = document.getElementById('formularioLibro');
     formularioLibro.onsubmit = this.pulsarCrearLibro.bind(this);
+    
 
     // Llenar el desplegable de autores al cargar la página
     this.llenarDesplegableAutores();
