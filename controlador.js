@@ -57,28 +57,12 @@ export class Controlador {
     
 
     async pulsarAutor() {
-        const autores = await this.modeloautor.mostrarAutor();
-        
-        // Si la lista de autores no se ha mostrado aún o ha cambiado, actualizar y visualizar
-        if (!this.autoresMostrados || this.vistas.get(Vista.vistalistarautor).haCambiado(autores)) {
-            this.vistas.get(Vista.vistalistarautor).visualizarAutor(autores);
-            this.autoresMostrados = true;
-        }
-    
+         await this.modeloautor.mostrarAutor();
+        this.vistas.get(Vista.vistalistarautor).visualizarAutor();
         this.verVista(Vista.vistalistarautor);
     }
 
-    async mostrarVistaListarAutores() {
-        const autores = await this.modeloautor.mostrarAutor();
-        this.vistas.get(Vista.vistalistarautor).visualizarAutor(autores);
-        this.verVista(Vista.vistalistarautor);
-    }
-
-    async mostrarVistaListarObras() {
-        const obras = await this.modeloobra.mostrarObra();
-        this.vistas.get(Vista.vistalistarlibro).visualizarLibro(obras);
-        this.verVista(Vista.vistalistarlibro);
-    }
+   
     
    
     verVista (vista) {

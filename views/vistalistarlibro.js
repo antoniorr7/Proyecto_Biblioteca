@@ -88,5 +88,6 @@ export class VistaListarLibro extends Vista {
         // Llamar al método borrarAutor con el id del autor
         console.log("idObra: " + idObra)
         await this.datos.borrarObra(idObra);
+        this.controlador.pulsarLibro();
     }
 }

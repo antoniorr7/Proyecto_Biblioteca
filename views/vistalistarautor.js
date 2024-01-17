@@ -98,17 +98,6 @@ export class VistaListarAutor extends Vista {
         // Llamar al método borrarAutor con el id del autor
         await this.datos.borrarAutor(idAutor);
         // Volver a visualizar la lista después de borrar
-        await this.visualizarAutor();
-    }
-
-    haCambiado(nuevaLista) {
-        // Comparar la nueva lista con la lista anterior basándonos en los identificadores únicos (id)
-        const idsNuevaLista = nuevaLista.map(autor => autor.id);
-        const idsListaMostrada = this.listaMostrada.map(autor => autor.id);
-
-        // Verificar si hay cambios
-        const haCambiado = JSON.stringify(idsNuevaLista) !== JSON.stringify(idsListaMostrada);
-
-        return haCambiado;
+        this.controlador.pulsarAutor();
     }
 }

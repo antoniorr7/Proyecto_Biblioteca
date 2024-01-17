@@ -48,11 +48,11 @@ export class VistaInsertarLibro extends Vista {
         genero: document.getElementsByName('genero')[0].value,
       };
       await this.modeloobra.insertarObra(libroData);
-      this.controlador.mostrarVistaListarObras()
+      this.controlador.pulsarLibro();
     } else {
       console.error('Por favor, selecciona una imagen');
     }
-
+    
   }
   // Función para convertir una imagen a Base64
  getBase64FromImage(inputFile) {

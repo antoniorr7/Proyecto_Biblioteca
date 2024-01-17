@@ -32,7 +32,7 @@ export class VistaInsertarAutor extends Vista {
       };
       
       await this.modeloautor.insertarAutor(autorData);
-      this.controlador.mostrarVistaListarAutores();
+      this.controlador.pulsarAutor();
     } else {
       console.error('Por favor, selecciona una imagen');
     }
