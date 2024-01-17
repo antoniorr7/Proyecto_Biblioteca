@@ -73,9 +73,13 @@ export class Controlador {
         this.vistas.get(Vista.vistalistarautor).visualizarAutor(autores);
         this.verVista(Vista.vistalistarautor);
     }
-    
-    
 
+    async mostrarVistaListarObras() {
+        const obras = await this.modeloobra.mostrarObra();
+        this.vistas.get(Vista.vistalistarlibro).visualizarLibro(obras);
+        this.verVista(Vista.vistalistarlibro);
+    }
+    
    
     verVista (vista) {
         this.ocultarVistas()
