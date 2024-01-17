@@ -80,7 +80,7 @@ export class Rest {
                 method: 'DELETE',
                 headers: this.headers
             });
-
+            console.log('response: ' + response)
             return this.handleResponse(response);
         } catch (error) {
             console.error('Error:', error);
@@ -170,15 +170,18 @@ export class Rest {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
     
-        const responseBody = await response.text();
+        const responseBodyText = await response.text();
     
         try {
-            return JSON.parse(responseBody);
+            // Intenta parsear la respuesta como JSON
+            const responseBody = JSON.parse(responseBodyText);
+            return responseBody;
         } catch (error) {
-            console.error('Error parsing JSON:', error);
-            return null;
+            return responseBodyText;
         }
     }
+    
+    
     
     
 }
