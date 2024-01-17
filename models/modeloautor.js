@@ -5,28 +5,29 @@ export class ModeloAutor {
       this.rest = new Rest()
     }
     async mostrarAutor() {
-      const autores = await this.rest.getAutor()
-
-      if (autores) {
-          console.log('LISTA AUTORES:', autores)
-          return autores
-      } else {
-          console.log('No se pudo obtener la lista de autores')
-          return null
-      }
+        try {
+            const autores = await this.rest.getAutor();
+            console.log('LISTA AUTORES:', autores);
+            return autores;
+        } catch (error) {
+            console.error('Error al obtener la lista de autores:', error);
+            return null;
+        }
     }
-
+    
     async insertarAutor(autorData) {
         const respuesta = await this.rest.crearAutor(autorData);
-
+    
         if (respuesta) {
             console.log('Autor creado exitosamente:', respuesta);
+            // Devuelve la lista de autores después de la inserción
             return await this.mostrarAutor();
         } else {
             console.error('Hubo un error al crear el autor.');
             return null;
         }
     }
+    
     async borrarAutor(id){
         const respuesta = await this.rest.borrarAutor(id)
         
@@ -37,4 +38,5 @@ export class ModeloAutor {
             return null;
         }
     }
+    
   }

@@ -7,6 +7,7 @@ export class VistaListarAutor extends Vista {
     constructor(controlador, base) {
         super(controlador, base);
         this.datos = new ModeloAutor();
+        this.listaMostrada = [];
 
         const crear = document.getElementById('añadir-autor');
         crear.onclick = this.pulsarCrear.bind(this);
@@ -14,6 +15,7 @@ export class VistaListarAutor extends Vista {
 
     async visualizarAutor() {
         const autores = await this.datos.mostrarAutor();
+        this.listaMostrada = autores;
 
         if (autores) {
             const scrollDiv = document.getElementById('scroll');
@@ -34,7 +36,7 @@ export class VistaListarAutor extends Vista {
                 imagenLink.href = 'autor.html';
 
                 const imagen = document.createElement('img');
-                imagen.src = autor.foto; // Asumiendo que 'foto' es la URL de la imagen
+                imagen.src = autor.foto; // Así es como se asigna una imagen en formato Base64
                 imagen.alt = 'Descripción de la imagen';
 
                 const nombreAutorLink = document.createElement('a');
@@ -97,5 +99,16 @@ export class VistaListarAutor extends Vista {
         await this.datos.borrarAutor(idAutor);
         // Volver a visualizar la lista después de borrar
         await this.visualizarAutor();
+    }
+
+    haCambiado(nuevaLista) {
+        // Comparar la nueva lista con la lista anterior basándonos en los identificadores únicos (id)
+        const idsNuevaLista = nuevaLista.map(autor => autor.id);
+        const idsListaMostrada = this.listaMostrada.map(autor => autor.id);
+
+        // Verificar si hay cambios
+        const haCambiado = JSON.stringify(idsNuevaLista) !== JSON.stringify(idsListaMostrada);
+
+        return haCambiado;
     }
 }

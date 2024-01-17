@@ -42,6 +42,7 @@ export class Controlador {
         libros.onclick = this.pulsarLibro.bind(this)
         autores.onclick = this.pulsarAutor.bind(this)
     
+        
     }
 
     pulsarInicio(){
@@ -55,14 +56,25 @@ export class Controlador {
     }
     
 
-    async pulsarAutor(){
-        if (!this.autoresMostrados) {  // Verificar si la lista de autores ya se ha mostrado
-            await this.modeloautor.mostrarAutor()
-            this.vistas.get(Vista.vistalistarautor).visualizarAutor()
-            this.autoresMostrados = true;  // Establecer la bandera a true después de mostrar la lista
+    async pulsarAutor() {
+        const autores = await this.modeloautor.mostrarAutor();
+        
+        // Si la lista de autores no se ha mostrado aún o ha cambiado, actualizar y visualizar
+        if (!this.autoresMostrados || this.vistas.get(Vista.vistalistarautor).haCambiado(autores)) {
+            this.vistas.get(Vista.vistalistarautor).visualizarAutor(autores);
+            this.autoresMostrados = true;
         }
-        this.verVista(Vista.vistalistarautor)
+    
+        this.verVista(Vista.vistalistarautor);
     }
+
+    async mostrarVistaListarAutores() {
+        const autores = await this.modeloautor.mostrarAutor();
+        this.vistas.get(Vista.vistalistarautor).visualizarAutor(autores);
+        this.verVista(Vista.vistalistarautor);
+    }
+    
+    
 
    
     verVista (vista) {

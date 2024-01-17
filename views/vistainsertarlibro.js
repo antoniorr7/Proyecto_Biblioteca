@@ -32,16 +32,42 @@ export class VistaInsertarLibro extends Vista {
   async pulsarCrearLibro(event) {
     event.preventDefault();
 
-    const libroData = {
-      titulo: document.getElementsByName('titulo')[0].value,
-      id_autor: parseInt(document.getElementsByName('autor')[0].value),
-      fecha_publicacion: document.getElementsByName('fecha_publicacion')[0].value,
-      reseña: document.getElementsByName('reseña')[0].value,
-      portada: document.getElementsByName('portada')[0].value,
-      genero: document.getElementsByName('genero')[0].value,
-    };
-
-    await this.modeloobra.insertarObra(libroData);
+    const inputFile = document.getElementsByName('portada')[0].files[0];
+    
+    // Verifica si se ha seleccionado un archivo
+    if (inputFile) {
+      // Convierte la imagen a Base64
+      const base64Image = await this.getBase64FromImage(inputFile);
+    
+      const libroData = {
+        titulo: document.getElementsByName('tituloLibro')[0].value,
+        id_autor: parseInt(document.getElementsByName('autor')[0].value),
+        fecha_publicacion: document.getElementsByName('fecha_publicacion')[0].value,
+        reseña: document.getElementsByName('reseña')[0].value,
+        portada: base64Image, // Guarda la imagen en Base64
+        genero: document.getElementsByName('genero')[0].value,
+      };
+      await this.modeloobra.insertarObra(libroData);
+    } else {
+      console.error('Por favor, selecciona una imagen');
+    }
 
   }
+  // Función para convertir una imagen a Base64
+ getBase64FromImage(inputFile) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    
+    reader.onload = (event) => {
+      resolve(event.target.result);
+    };
+
+    reader.onerror = (error) => {
+      reject(error);
+    };
+
+    reader.readAsDataURL(inputFile);
+  });
+}
+
 }

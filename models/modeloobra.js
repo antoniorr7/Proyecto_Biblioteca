@@ -5,26 +5,24 @@ export class ModeloObra {
       this.rest = new Rest()
     }
     async mostrarObra() {
-      const obra = await this.rest.getObra()
-
-      if (obra) {
-          console.log('Lista de obras:', obra)
-          return obra
-      } else {
-          console.log('No se pudo obtener la lista de obras')
-          return null
-      }
+        try {
+            const obra = await this.rest.getObra()
+            console.log('Lista de obras:', obra)
+            return obra;
+        } catch (error) {
+            console.error('Error al obtener la lista de Obras:', error);
+            return null;
+        }
     }
 
-    
     async insertarObra(obraData) {
         const respuesta = await this.rest.crearObra(obraData);
 
         if (respuesta) {
             console.log('Obra creado exitosamente:', respuesta);
-            return await this.mostrarAutor();
+            return await this.mostrarObra();
         } else {
-            console.error('Hubo un error al crear el autor.');
+            console.error('Hubo un error al crear la obra.');
             return null;
         }
     }

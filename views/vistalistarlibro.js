@@ -23,10 +23,17 @@ export class VistaListarLibro extends Vista {
                     const cardElement = document.createElement('div');
                     cardElement.classList.add('card');
     
-                    // Crear un enlace para la imagen
-                    const imgLink = document.createElement('a');
-                    imgLink.href = 'libro.html';
-                    imgLink.innerHTML = `<img src="imagenes/111.jpg" alt="Descripción de la imagen">`;
+                    // Crear un enlace para el detalle de la obra
+                    const detalleLink = document.createElement('a');
+                    detalleLink.href = 'libro.html';
+    
+                    // Crear el elemento de la imagen usando el campo 'portada' de la obra
+                    const portadaImage = document.createElement('img');
+                    portadaImage.src = obra.portada; // Utiliza la ruta de la imagen directamente
+                    portadaImage.alt = 'Descripción de la imagen';
+    
+                    // Agregar la imagen al enlace
+                    detalleLink.appendChild(portadaImage);
     
                     // Crear un div para el contenido de la card
                     const cardContent = document.createElement('div');
@@ -37,19 +44,18 @@ export class VistaListarLibro extends Vista {
                     obraElement.textContent = `Título: ${obra.titulo}`;
     
                     // Crear enlaces para la papelera y el lápiz
-                    
                     const eliminarObra = document.createElement('img');
                     eliminarObra.src = 'imagenes/papelera.png';
                     eliminarObra.alt = 'Eliminar Obra';
                     eliminarObra.id = 'papelera';
                     eliminarObra.classList.add('editor');
-
+    
                     // Añadir un manejador de eventos al hacer clic en la papelera
-                    eliminarObra.onclick = () =>{
+                    eliminarObra.onclick = () => {
                         console.log(obra.id)
                         this.pulsarBorrar(obra.id);
-                    } 
-                        
+                    };
+    
                     const lapizLink = document.createElement('a');
                     lapizLink.href = 'formulario-libros.html';
                     lapizLink.innerHTML = `<img id="lapiz" src="imagenes/lapiz.png" alt="Editar">`;
@@ -60,7 +66,7 @@ export class VistaListarLibro extends Vista {
                     cardContent.appendChild(lapizLink);
     
                     // Agregar elementos al cardElement
-                    cardElement.appendChild(imgLink);
+                    cardElement.appendChild(detalleLink);
                     cardElement.appendChild(cardContent);
     
                     // Agregar la card al divScrollLateral
@@ -73,6 +79,7 @@ export class VistaListarLibro extends Vista {
             console.error('Error al visualizar los libros:', error);
         }
     }
+    
     async pulsarCrear() {
         this.controlador.verVista(Vista.vistainsertarlibro)
     }

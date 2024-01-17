@@ -165,11 +165,21 @@ export class Rest {
         }
     }
 
-    handleResponse(response) {
+    async handleResponse(response) {
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
-        return response.json();
+    
+        const responseBody = await response.text();
+    
+        try {
+            return JSON.parse(responseBody);
+        } catch (error) {
+            console.error('Error parsing JSON:', error);
+            return null;
+        }
     }
+    
+    
 }
 
