@@ -1,12 +1,14 @@
 // Importar las clases necesarias
 import { Vista } from './vista.js';
 import { ModeloAutor } from '../models/modeloautor.js';
+import { VistaAutor } from '../views/vistaautor.js';
 
 // Definir la clase VistaListarAutor
 export class VistaListarAutor extends Vista {
     constructor(controlador, base) {
         super(controlador, base);
         this.datos = new ModeloAutor();
+        this.datosautor = new VistaAutor();
         this.listaMostrada = [];
         
         const crear = document.getElementById('añadir-autor');
@@ -76,8 +78,7 @@ export class VistaListarAutor extends Vista {
 
                 tablaAutores.appendChild(filaAutor);
                 nombreAutorLink.addEventListener('click', () => {
-                    this.autor = autor;
-                   console.log(this.autor)
+                    this.autor = autor
                     this.pulsarAutor();
                 });
 
@@ -101,6 +102,7 @@ export class VistaListarAutor extends Vista {
     }
 
     async pulsarAutor(){ 
+        this.datosautor.rellenarAutor(this.autor)
         this.controlador.verVista(Vista.vistaautor)
     }
 }

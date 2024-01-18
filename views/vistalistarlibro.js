@@ -1,13 +1,17 @@
 import { Vista } from './vista.js';
 import { ModeloObra } from '../models/modeloobra.js';
+import { VistaLibro } from '../views/vistalibro.js';
 
 export class VistaListarLibro extends Vista {
     constructor(controlador, base) {
         super(controlador, base);
         this.datos = new ModeloObra();
+        this.datosobra = new VistaLibro();
 
         const crear = document.getElementById('crearLibro')
         crear.onclick = this.pulsarCrear.bind(this)
+
+        this.obra
     }
 
     async visualizarLibro() {
@@ -22,6 +26,11 @@ export class VistaListarLibro extends Vista {
                     // Crear una nueva estructura de card para cada obra
                     const cardElement = document.createElement('div');
                     cardElement.classList.add('card');
+
+                    cardElement.addEventListener('click', () => {
+                        this.obra = obra;
+                        this.pulsarObra();
+                    });
 
                     const detalleLink = document.createElement('button');
                     detalleLink.classList.add('card-button');
@@ -91,6 +100,11 @@ export class VistaListarLibro extends Vista {
         console.log("idObra: " + idObra)
         await this.datos.borrarObra(idObra);
         this.controlador.pulsarLibro();
+    }
+
+    async pulsarObra(){ 
+        this.datosobra.rellenarObra(this.obra)
+        this.controlador.verVista(Vista.vistalibro)
     }
 
     async redirigirAVistaDetalle(id){
