@@ -71,7 +71,7 @@ export class VistaListarAutor extends Vista {
                 eliminarImagen.classList.add('editor');
 
                 // Añadir un manejador de eventos al hacer clic en la papelera
-                eliminarLink.onclick = () => this.pulsarBorrar(autor.id); // Supongo que 'id' es el identificador único del autor
+                eliminarLink.onclick = () => this.pulsarBorrar(autor.id); 
 
                 eliminarLink.appendChild(eliminarImagen);
 

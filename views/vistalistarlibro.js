@@ -22,10 +22,12 @@ export class VistaListarLibro extends Vista {
                     // Crear una nueva estructura de card para cada obra
                     const cardElement = document.createElement('div');
                     cardElement.classList.add('card');
-    
-                    // Crear un enlace para el detalle de la obra
-                    const detalleLink = document.createElement('a');
-                    detalleLink.href = 'libro.html';
+
+                    const detalleLink = document.createElement('button');
+                    detalleLink.classList.add('card-button');
+                    detalleLink.addEventListener('click', () => {
+                        this.redirigirAVistaDetalle(obra.id);
+                    });
     
                     // Crear el elemento de la imagen usando el campo 'portada' de la obra
                     const portadaImage = document.createElement('img');
@@ -78,6 +80,9 @@ export class VistaListarLibro extends Vista {
         } catch (error) {
             console.error('Error al visualizar los libros:', error);
         }
+        detalleLink.addEventListener('click', () => {
+            this.pasarID(obra.id);
+        });
     }
     
     async pulsarCrear() {
