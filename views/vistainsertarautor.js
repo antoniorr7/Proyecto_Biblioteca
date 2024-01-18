@@ -2,6 +2,7 @@ import { Vista } from './vista.js';
 import { Rest } from '../service/rest.js';
 import { ModeloAutor } from '../models/modeloautor.js';
 
+
 export class VistaInsertarAutor extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
@@ -10,6 +11,7 @@ export class VistaInsertarAutor extends Vista {
 
     const formulario = document.getElementById('formularioAutor');
     formulario.addEventListener('submit', (event) => this.pulsarCrearAutor(event));
+
   }
 
   async pulsarCrearAutor(event) {
@@ -50,6 +52,9 @@ export class VistaInsertarAutor extends Vista {
       };
   
       reader.readAsDataURL(inputFile);
+
     });
   }
+  
+
 }
