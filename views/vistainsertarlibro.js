@@ -70,5 +70,4 @@ export class VistaInsertarLibro extends Vista {
     reader.readAsDataURL(inputFile);
   });
 }
-
 }

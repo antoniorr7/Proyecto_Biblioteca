@@ -699,3 +699,14 @@ h1 {
     transform-origin: 0;
     transition: 1s;
 }
+
+/*detalles autores */
+.body-detalle-autores {
+    font-family: 'Browood-Regular';
+    margin: 0;
+    padding: 0;
+    background: url(imagenes/detalles.png) center;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+}

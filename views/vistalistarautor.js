@@ -32,12 +32,17 @@ export class VistaListarAutor extends Vista {
                 const imagenColumna = document.createElement('td');
                 imagenColumna.classList.add('imagen-columna');
 
+                const imagenLink = document.createElement('a');
 
 
                 const imagen = document.createElement('img');
                 imagen.src = autor.foto; // Así es como se asigna una imagen en formato Base64
                 imagen.alt = 'Descripción de la imagen';
 
+                const nombreAutorLink = document.createElement('a');
+                nombreAutorLink.addEventListener('click', () => {
+                    this.redirigirAVistaDetalle(autor.id);
+                });
 
                 const nombreAutorSpan = document.createElement('span');
                 nombreAutorSpan.classList.add('nombre-autor');
@@ -53,12 +58,7 @@ export class VistaListarAutor extends Vista {
                 editorColumna.classList.add('editor-columna');
 
 
-                const editarImagen = document.createElement('img');
-                editarImagen.src = 'imagenes/lapiz.png';
-                editarImagen.alt = 'Editar autor';
-                editarImagen.classList.add('editor');
-
-
+                const eliminarLink = document.createElement('a');
 
                 const eliminarImagen = document.createElement('img');
                 eliminarImagen.src = 'imagenes/papelera.png';
@@ -70,14 +70,12 @@ export class VistaListarAutor extends Vista {
 
                 eliminarLink.appendChild(eliminarImagen);
 
-                editorColumna.appendChild(editarLink);
                 editorColumna.appendChild(eliminarLink);
 
                 filaAutor.appendChild(imagenColumna);
                 filaAutor.appendChild(editorColumna);
 
                 tablaAutores.appendChild(filaAutor);
-                filaAutor.onclick = () => this.infoAutor(autor.id);
 
             });
 
@@ -97,7 +95,8 @@ export class VistaListarAutor extends Vista {
         // Volver a visualizar la lista después de borrar
         this.controlador.pulsarAutor();
     }
-    async infoAutor(id){
+
+    async redirigirAVistaDetalle(id){
         this.controlador.verVista(Vista.vistaautor)
     }
 }
