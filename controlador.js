@@ -6,6 +6,8 @@ import { VistaListarLibro } from './views/vistalistarlibro.js'
 import { VistaInsertarAutor } from './views/vistainsertarautor.js'
 import { VistaInsertarLibro } from './views/vistainsertarlibro.js'
 import { VistaInformacion } from './views/vistainformacion.js'
+import { VistaLibro } from './views/vistalibro.js'
+import { VistaAutor } from './views/vistaautor.js'
 import { Vista } from './views/vista.js';
 
 export class Controlador {
@@ -24,7 +26,8 @@ export class Controlador {
         const divCrearAutor = document.getElementById('divCrearAutor')
         const  divCrearLibro = document.getElementById('divCrearLibro')
         const  divInformacion = document.getElementById('divInformacion')
-
+        const  divLibro = document.getElementById('divLibro')
+        const  divAutor = document.getElementById('divAutor')
     
         //Creamos las vistas 
         this.vistas.set(Vista.vmenuinicial, new MenuInicial(this, divMenuInicial))
@@ -32,7 +35,9 @@ export class Controlador {
         this.vistas.set(Vista.vistalistarautor, new VistaListarAutor(this, divListarAutor))
         this.vistas.set(Vista.vistainsertarautor, new VistaInsertarAutor(this, divCrearAutor))
         this.vistas.set(Vista.vistainsertarlibro, new VistaInsertarLibro (this, divCrearLibro))
-        this.vistas.set(Vista.Vistainformacion, new VistaInformacion (this, divInformacion))
+        this.vistas.set(Vista.vistainformacion, new VistaInformacion (this, divInformacion))
+        this.vistas.set(Vista.vistalibro, new VistaLibro (this, divLibro))
+        this.vistas.set(Vista.vistaautor, new VistaAutor (this, divAutor))
 
         
         this.verVista(Vista.vmenuinicial)

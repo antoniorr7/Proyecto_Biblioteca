@@ -6,6 +6,8 @@ export class Vista {
       Vista.vistainsertarlibro = Symbol('Crear Libros')
       Vista.vistainsertarautor = Symbol('Crear Autor')
       Vista.vistainformacion = Symbol('Informacion')
+      Vista.vistalibro = Symbol('Libro')
+      Vista.vistaautor = Symbol('Autor')
     }
   
     constructor(controlador, base) {

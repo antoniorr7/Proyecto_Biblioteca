@@ -80,9 +80,6 @@ export class VistaListarLibro extends Vista {
         } catch (error) {
             console.error('Error al visualizar los libros:', error);
         }
-        detalleLink.addEventListener('click', () => {
-            this.pasarID(obra.id);
-        });
     }
     
     async pulsarCrear() {
@@ -94,5 +91,9 @@ export class VistaListarLibro extends Vista {
         console.log("idObra: " + idObra)
         await this.datos.borrarObra(idObra);
         this.controlador.pulsarLibro();
+    }
+
+    async redirigirAVistaDetalle(id){
+        this.controlador.verVista(Vista.vistalibro)
     }
 }

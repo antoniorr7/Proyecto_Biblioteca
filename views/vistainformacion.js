@@ -5,11 +5,7 @@ export class VistaInformacion extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
 
-    const imgFlecha = document.createElement('img');
-    imgFlecha.src = 'imagenes/papelera.png';
-    imgFlecha.alt = 'Atras';
-    imgFlecha.classList.add('flecha');
-
+    const imgFlecha = document.getElementById('flecha');
     // Añadir un manejador de eventos al hacer clic en la papelera
     imgFlecha.onclick = () => this.pulsarAtras();
   }

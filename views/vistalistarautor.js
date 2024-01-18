@@ -32,15 +32,12 @@ export class VistaListarAutor extends Vista {
                 const imagenColumna = document.createElement('td');
                 imagenColumna.classList.add('imagen-columna');
 
-                const imagenLink = document.createElement('a');
-                imagenLink.href = 'autor.html';
+
 
                 const imagen = document.createElement('img');
                 imagen.src = autor.foto; // Así es como se asigna una imagen en formato Base64
                 imagen.alt = 'Descripción de la imagen';
 
-                const nombreAutorLink = document.createElement('a');
-                nombreAutorLink.href = 'autor.html';
 
                 const nombreAutorSpan = document.createElement('span');
                 nombreAutorSpan.classList.add('nombre-autor');
@@ -55,15 +52,13 @@ export class VistaListarAutor extends Vista {
                 const editorColumna = document.createElement('td');
                 editorColumna.classList.add('editor-columna');
 
-                const editarLink = document.createElement('a');
-                editarLink.href = 'formulario-autores.html';
 
                 const editarImagen = document.createElement('img');
                 editarImagen.src = 'imagenes/lapiz.png';
                 editarImagen.alt = 'Editar autor';
                 editarImagen.classList.add('editor');
 
-                const eliminarLink = document.createElement('a');
+
 
                 const eliminarImagen = document.createElement('img');
                 eliminarImagen.src = 'imagenes/papelera.png';
@@ -82,6 +77,8 @@ export class VistaListarAutor extends Vista {
                 filaAutor.appendChild(editorColumna);
 
                 tablaAutores.appendChild(filaAutor);
+                filaAutor.onclick = () => this.infoAutor(autor.id);
+
             });
 
             scrollDiv.appendChild(tablaAutores);
@@ -99,5 +96,8 @@ export class VistaListarAutor extends Vista {
         await this.datos.borrarAutor(idAutor);
         // Volver a visualizar la lista después de borrar
         this.controlador.pulsarAutor();
+    }
+    async infoAutor(id){
+        this.controlador.verVista(Vista.vistaautor)
     }
 }
