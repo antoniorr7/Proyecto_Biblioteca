@@ -8,9 +8,10 @@ export class VistaListarAutor extends Vista {
         super(controlador, base);
         this.datos = new ModeloAutor();
         this.listaMostrada = [];
-
+        
         const crear = document.getElementById('añadir-autor');
         crear.onclick = this.pulsarCrear.bind(this);
+        this.autor
     }
 
     async visualizarAutor() {
@@ -40,9 +41,7 @@ export class VistaListarAutor extends Vista {
                 imagen.alt = 'Descripción de la imagen';
 
                 const nombreAutorLink = document.createElement('a');
-                nombreAutorLink.addEventListener('click', () => {
-                    this.redirigirAVistaDetalle(autor.id);
-                });
+               
 
                 const nombreAutorSpan = document.createElement('span');
                 nombreAutorSpan.classList.add('nombre-autor');
@@ -76,6 +75,11 @@ export class VistaListarAutor extends Vista {
                 filaAutor.appendChild(editorColumna);
 
                 tablaAutores.appendChild(filaAutor);
+                nombreAutorLink.addEventListener('click', () => {
+                    this.autor = autor;
+                   console.log(this.autor)
+                    this.pulsarAutor();
+                });
 
             });
 
@@ -96,7 +100,7 @@ export class VistaListarAutor extends Vista {
         this.controlador.pulsarAutor();
     }
 
-    async redirigirAVistaDetalle(id){
+    async pulsarAutor(){ 
         this.controlador.verVista(Vista.vistaautor)
     }
 }
