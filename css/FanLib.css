@@ -1,53 +1,44 @@
 /* Cuerpo */
-body{
-    font-family: 'Browood-Regular';
-}
-.body-index {
+body {
     margin: 0;
     padding: 0;
-    background: url(../imagenes/index.jpeg) center;
-    background-size: cover;
-    background-attachment: fixed;
+    font-family: 'Classyvogueregular';
+    height: 100vh;
     overflow: hidden;
 }
 
-.body-libros {
-    font-family: 'Browood-Regular';
-    margin: 0;
-    padding: 0;
-    background: url(../imagenes/listas.jpg) center;
+#divMenuInicial {
+    position: absolute  ;
+    background-image: url(../imagenes/index_out.jpg);
+    background-position: center;
     background-size: cover;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
+
+}
+
+
+.body-autores,
+.body-libros{
+    background: url(../imagenes/listas.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
 }
 
-.body-autores {
-    font-family: 'Browood-Regular';
-    margin: 0;
-    padding: 0;
-    background: url(../imagenes/listas.jpg) center;
-    background-size: cover;
-    background-attachment: fixed;
-    overflow: hidden;
-}
 
-.body-form-libros {
-    font-family: 'Browood-Regular';
-    margin: 0;
-    padding: 0;
-    background: url(../imagenes/formularios.jpg) center;
-    background-size: cover;
-    background-attachment: fixed;
-    overflow: hidden;
-}
-
+.body-form-libros,
 .body-form-autores {
-    font-family: 'Browood-Regular';
-    margin: 0;
-    padding: 0;
-    background: url(../imagenes/formularios.jpg) center;
+    background: url(../imagenes/formularios.jpg);
+    background-position: center;
     background-size: cover;
-    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100vh;
     overflow: hidden;
 }
 
@@ -66,9 +57,7 @@ body{
     width: 99.78%;
     height: 5em;
     margin-left: 0;
-    background: rgba(0, 0, 0, 0.3);
-    -webkit-backdrop-filter: blur(20px);
-    backdrop-filter: blur(5px);
+    background: black;
     border: 1.5px solid #efb810;
     border-left-color: transparent;
     border-right-color: transparent;
@@ -78,27 +67,27 @@ body{
 
 #logo {
     margin-left: 3em;
-    margin-top: 1em;
-    width: 3em;
-    height: 3em;
+    width: 5em;
+    height: 5em;
     border-radius: 50%;
     cursor: pointer;
 }
 
 .opcion {
-    margin-left: 0px;
+    margin-left: 20vh;
     text-align: center;
     color: white;
     border: 2px solid #efb810;
     border-style: outset;
     border-radius: 5px;
+    margin-top: 1.5vh;
     width: 15em;
-    height: 80%;
+    height: 60%;
     background-color: rgba(0, 0, 0, 0);
     overflow: hidden;
 }
 
-#btnInicio{
+#btnInicio {
     background-color: rgba(0, 0, 0, 0);
     border: 0px;
 }
@@ -153,11 +142,15 @@ body{
 #gif {
     display: flex;
     justify-content: center;
-    margin-top: 20%;
-    margin-left: 42%;
-    width: 80px;
-    height: 80px;
+    width: 100%;
+    height: fit-content;
+    margin-top: 50vh;
     cursor: pointer;
+}
+
+#gif img{
+    width: 2.5em;
+    height: 2.5em;
 }
 
 #gif img:hover {
@@ -185,13 +178,14 @@ body{
 
 #scroll-lateral {
     display: flex;
-    width: 180em;
+    width: 70%;
     height: 27em;
     overflow-x: auto;
     padding: 1.5em;
     margin-top: 10em;
     mask-image: linear-gradient(to right, rgba(0, 0, 0, 0), #000 15px, #000 calc(100% - 15px), rgba(0, 0, 0, 0));
 }
+
 
 .card {
     width: 15em;
@@ -257,23 +251,26 @@ body{
 }
 
 #crearLibro {
-    width: 6em;
-    height: 6em;
+    position: absolute;
+    top: 0;
+    margin-top: 60vh;
+    margin-right: 25vh;
+    right: 0;
+    width: 7vh;
+    height: 7vh;
     border-radius: 50px;
-    margin: 3.5em;
-    margin-top: 10em;
     background-image: url(../imagenes/añadir.png);
     background-size: cover;
     cursor: pointer;
     color: transparent;
 }
 
-#añadir:hover {
-    transform: scale(2);
+#crearLibro:hover {
+    transform: scale(1.2);
     transition-duration: 1.2s;
 }
 
-#añadir:not(:hover) {
+#crearLibro:not(:hover) {
     transform-origin: 0;
     transition: 1s;
 }
@@ -287,6 +284,7 @@ h1 {
 
 #scroll {
     width: 96.8%;
+    height: 50vh;
     margin-left: 1.5em;
     max-height: 29em;
     overflow-y: auto;
@@ -354,8 +352,8 @@ h1 {
 }
 
 #añadir-autor {
-    width: 8em;
-    height: 8em;
+    width: 4em;
+    height: 4em;
     border-radius: 50px;
     margin-top: 3.8%;
     margin-left: 45%;
@@ -390,32 +388,16 @@ h1 {
     border: 1.5px solid #efb810;
     width: 96.8%;
     max-height: 39em;
-    margin-top: 2em;
+    margin-top: 1vh;
     margin-left: 1.5em;
     border-radius: 20px;
 }
 
 #formulario {
     display: flex;
-    margin-top: -1.3em;
+    margin-top: -2em;
     width: 100%;
     height: fit-content;
-}
-
-.marco {
-    border-radius: 20px;
-    width: 89em;
-    height: 4.3em;
-}
-
-.marco:hover {
-    transition-duration: 0.8s;
-    background-color: #efb810;
-}
-
-.marco:not(:hover) {
-    transform-origin: 0;
-    transition: 1s;
 }
 
 .espacio-libros {
@@ -448,12 +430,14 @@ h1 {
     color: rgb(0, 0, 0);
 }
 
-#boton {
-    width: 6em;
-    height: 6em;
+#submit {
+    position: absolute;
+    bottom: 0;
+    margin-left: 90vh;
+    margin-bottom: 1vh;
+    width: 4em;
+    height: 4em;
     border-radius: 50px;
-    margin-top: 3em;
-    margin-left: 45%;
     background-image: url(../imagenes/guardar.png);
     background-size: cover;
     cursor: pointer;
@@ -471,18 +455,21 @@ h1 {
 }
 
 /* Formulario autores */
-.marco-autores {
+.marco-autores,
+.marco {
     border-radius: 20px;
     width: 89em;
     height: 3.5em;
 }
 
-.marco-autores:hover {
+.marco-autores:hover,
+.marco:hover{
     transition-duration: 0.8s;
     background-color: #efb810;
 }
 
-.marco-autores:not(:hover) {
+.marco-autores:not(:hover),
+.marco:not(:hover) {
     transform-origin: 0;
     transition: 1s;
 }
@@ -502,19 +489,7 @@ h1 {
     height: fit-content;
 }
 
-#flecha {
-    margin-top: -1em;
-    margin-left: 4em;
-    width: 3em;
-    height: 3em;
-    transform: rotate(225deg);
-    transition: transform 2s;
-}
 
-#flecha:hover {
-    width: 2em;
-    height: 2em;
-}
 
 
 /* Info */
@@ -523,7 +498,7 @@ h1 {
     width: 25em;
     height: fit-content;
     margin-top: -1.2em;
-    margin-left: 5em;
+    margin-left: 15vh;
     font-size: 0.7em;
 }
 
@@ -531,13 +506,14 @@ h1 {
     width: 25em;
     height: fit-content;
     margin-top: 12em;
-    margin-left: 50em;
+    margin-left: 110vh;  
     font-size: 0.7em;
 }
 #divInformacion{
+    width: 100%;
+    height: 100vh;
     background-image: url(../imagenes/info.jpg);
     background-size: cover;
-    background-attachment: fixed;
     margin: 0;
     padding: 0;
     overflow: hidden;
@@ -545,8 +521,32 @@ h1 {
     font-size: 2em;
 }
 
+#flecha {
+    margin-top: -1em;
+    margin-left: 4em;
+    width: 2em;
+    height: 2em;
+    transform: rotate(225deg);
+    transition: transform 2s;
+}
+
+#flecha:hover {
+    width: 3em;
+    height: 3em;
+}
+
 
 /* Detalle libro */
+
+#divLibro{
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background: url(../imagenes/detalles.png) center;
+    background-size: cover;
+    overflow: hidden;
+}
 #izquierda-libro {
     width: 32%;
     height: auto;
@@ -702,12 +702,12 @@ h1 {
 
 /*detalles autores */
 .body-detalle-autores {
-    font-family: 'Browood-Regular';
+    width: 100%;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    background: url(imagenes/detalles.png) center;
+    background: url(../imagenes/detalles.png) center;
     background-size: cover;
-    background-attachment: fixed;
     overflow: hidden;
 }
 
