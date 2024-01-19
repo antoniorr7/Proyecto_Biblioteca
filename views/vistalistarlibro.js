@@ -1,6 +1,7 @@
 import { Vista } from './vista.js';
 import { ModeloObra } from '../models/modeloobra.js';
 import { VistaLibro } from '../views/vistalibro.js';
+import { VistaListarAutor } from '../views/vistalistarautor.js';
 
 export class VistaListarLibro extends Vista {
     constructor(controlador, base, autorseleccionado) {
@@ -13,7 +14,8 @@ export class VistaListarLibro extends Vista {
         crear.onclick = this.pulsarCrear.bind(this)
 
         this.obra
-    }
+        this.libroseleccionado
+    }   
 
     async visualizarLibro() {
         try {
@@ -104,11 +106,10 @@ export class VistaListarLibro extends Vista {
     }
 
     async pulsarObra(){ 
+        this.libroseleccionado = this.obra.id_autor
+        const vistaListarAutor = new VistaListarAutor(this.controlador, this. base, this.obraseleccionada)
+        vistaListarAutor.visualizarAutor()
         this.datosobra.rellenarObra(this.obra)
-        this.controlador.verVista(Vista.vistalibro)
-    }
-
-    async redirigirAVistaDetalle(id){
         this.controlador.verVista(Vista.vistalibro)
     }
 }

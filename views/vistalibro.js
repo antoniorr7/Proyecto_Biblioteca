@@ -1,8 +1,11 @@
 import { Vista } from './vista.js';
+import { ModeloAutor } from '../models/modeloautor.js';
 
 export class VistaLibro extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
+    
+    this.datos = new ModeloAutor();
   }
 
   rellenarObra(datosLibro) {
@@ -19,6 +22,14 @@ export class VistaLibro extends Vista {
     `;
 
     document.getElementById('sinopsis').innerText = datosLibro.reseña;
+    this.visualizarAutorLibro(datosLibro.id_autor)
   }
+
+  async visualizarAutorLibro(id_autorLibro) {
+    const autor = await this.datos.obtenerAutorPorLibro(id_autorLibro);
+    console.log(autor)
+    console.log(autor.nombre)
+  }
+
 
 }

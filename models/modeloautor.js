@@ -37,5 +37,21 @@ export class ModeloAutor {
             return null;
         }
     }
+
+    async obtenerAutorPorLibro(idAutorLibro) {
+        try {
+            // Obtener todas las autores
+            const autores = await this.mostrarAutor();
+
+            // Filtrar las autores que pertenecen al autor con el idAutor proporcionado
+            const librosAutor = autores.filter(autor => autor.id === idAutorLibro);
+
+            console.log(`Lista de autores del libro con ID ${idAutorLibro}:`, librosAutor);
+            return librosAutor;
+        } catch (error) {
+            console.error('Error al obtener los libros del autor:', error);
+            return null;
+        }
+    }
     
   }

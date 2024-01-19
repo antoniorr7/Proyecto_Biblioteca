@@ -6,12 +6,14 @@ import { VistaListarLibro } from '../views/vistalistarlibro.js';
 
 // Definir la clase VistaListarAutor
 export class VistaListarAutor extends Vista {
-    constructor(controlador, base) {
+    constructor(controlador, base, libroseleccionado) {
         super(controlador, base);
         this.datos = new ModeloAutor();
         this.datosautor = new VistaAutor();
-        this.datoslibro = new VistaListarLibro();
+        this.libroseleccionado = libroseleccionado;
+
         this.listaMostrada = [];
+
         
         const crear = document.getElementById('añadir-autor');
         crear.onclick = this.pulsarCrear.bind(this);
