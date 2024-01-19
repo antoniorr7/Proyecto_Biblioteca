@@ -3,10 +3,11 @@ import { ModeloObra } from '../models/modeloobra.js';
 import { VistaLibro } from '../views/vistalibro.js';
 
 export class VistaListarLibro extends Vista {
-    constructor(controlador, base) {
+    constructor(controlador, base, autorseleccionado) {
         super(controlador, base);
         this.datos = new ModeloObra();
         this.datosobra = new VistaLibro();
+        this.autorseleccionado = autorseleccionado;
 
         const crear = document.getElementById('crearLibro')
         crear.onclick = this.pulsarCrear.bind(this)

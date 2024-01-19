@@ -1,12 +1,14 @@
 import { Vista } from './vista.js';
+import { ModeloObra } from '../models/modeloobra.js';
 
 export class VistaAutor extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
-    
+    this.datos = new ModeloObra();
   }
 
   rellenarAutor(datosAutor) {
+    console.log('ID DEL AUTOR: ', datosAutor.id);
     document.getElementById('imagen').innerHTML = `<img src="${datosAutor.foto}" alt="Foto autor">`;
 
     document.getElementById('datos').innerHTML = `
@@ -19,5 +21,26 @@ export class VistaAutor extends Vista {
     `;
 
     document.getElementById('biografía').innerText = datosAutor.biografia;
+    this.visualizarLibrosAutor(datosAutor.id);
+  }
+
+  async visualizarLibrosAutor(idAutor) {
+    // Utiliza el nuevo método en ModeloObra para obtener los libros del autor
+    const libros = await this.datos.obtenerLibrosPorAutor(idAutor);
+    
+    const contenedorLibros = document.getElementById('contenedorLibros');
+
+    // Limpia el contenido previo del contenedor de libros
+    contenedorLibros.innerHTML = '';
+
+    // Itera sobre cada libro y crea dinámicamente un div con el título y la portada
+    libros.forEach(libro => {
+      const libroDiv = document.createElement('div');
+      libroDiv.innerHTML = `
+        <h3>${libro.titulo}</h3>
+        <img src="${libro.portada}" alt="Portada del libro">
+      `;
+      contenedorLibros.appendChild(libroDiv);
+    });
   }
 }

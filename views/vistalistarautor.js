@@ -2,6 +2,7 @@
 import { Vista } from './vista.js';
 import { ModeloAutor } from '../models/modeloautor.js';
 import { VistaAutor } from '../views/vistaautor.js';
+import { VistaListarLibro } from '../views/vistalistarlibro.js';
 
 // Definir la clase VistaListarAutor
 export class VistaListarAutor extends Vista {
@@ -9,11 +10,13 @@ export class VistaListarAutor extends Vista {
         super(controlador, base);
         this.datos = new ModeloAutor();
         this.datosautor = new VistaAutor();
+        this.datoslibro = new VistaListarLibro();
         this.listaMostrada = [];
         
         const crear = document.getElementById('añadir-autor');
         crear.onclick = this.pulsarCrear.bind(this);
         this.autor
+        this.autorseleccionado
     }
 
     async visualizarAutor() {
@@ -102,6 +105,9 @@ export class VistaListarAutor extends Vista {
     }
 
     async pulsarAutor(){ 
+        this.autorseleccionado = this.autor.id;
+        const vistaListarLibro = new VistaListarLibro(this.controlador, this.base, this.autorSeleccionadoId);
+        vistaListarLibro.visualizarLibro();
         this.datosautor.rellenarAutor(this.autor)
         this.controlador.verVista(Vista.vistaautor)
     }
