@@ -27,20 +27,30 @@ export class VistaAutor extends Vista {
   async visualizarLibrosAutor(idAutor) {
     // Utiliza el nuevo método en ModeloObra para obtener los libros del autor
     const libros = await this.datos.obtenerLibrosPorAutor(idAutor);
-    
-    const contenedorLibros = document.getElementById('contenedorLibros');
+
+    const contenedorLibros = document.getElementById('scroll-lateral-detalles');
 
     // Limpia el contenido previo del contenedor de libros
     contenedorLibros.innerHTML = '';
 
-    // Itera sobre cada libro y crea dinámicamente un div con el título y la portada
+    // Itera sobre cada libro y crea dinámicamente una carta con el título y la portada
     libros.forEach(libro => {
-      const libroDiv = document.createElement('div');
-      libroDiv.innerHTML = `
-        <h3>${libro.titulo}</h3>
-        <img src="${libro.portada}" alt="Portada del libro">
-      `;
-      contenedorLibros.appendChild(libroDiv);
+        const cartaLibro = document.createElement('div');
+        cartaLibro.className = 'card-detalles';
+
+        const imagenDiv = document.createElement('div');
+        imagenDiv.id = 'imagen';
+        imagenDiv.innerHTML = `<img src="${libro.portada}" alt="Portada del libro">`;
+
+        const contenidoDiv = document.createElement('div');
+        contenidoDiv.className = 'card-content-detalles';
+        contenidoDiv.innerHTML = `<h3 id="tituloLibro">${libro.titulo}</h3>`;
+
+        cartaLibro.appendChild(imagenDiv);
+        cartaLibro.appendChild(contenidoDiv);
+
+        contenedorLibros.appendChild(cartaLibro);
     });
-  }
+}
+
 }
