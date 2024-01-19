@@ -32,7 +32,6 @@ export class Rest {
                 method: 'GET',
                 headers: this.headers
             });
-
             return this.handleResponse(response);
         } catch (error) {
             console.error('Error:', error);

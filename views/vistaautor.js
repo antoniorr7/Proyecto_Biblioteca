@@ -8,7 +8,7 @@ export class VistaAutor extends Vista {
   }
 
   rellenarAutor(datosAutor) {
-    console.log('ID DEL AUTOR: ', datosAutor.id);
+
     document.getElementById('imagen').innerHTML = `<img src="${datosAutor.foto}" alt="Foto autor">`;
 
     document.getElementById('datos').innerHTML = `

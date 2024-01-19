@@ -32,13 +32,14 @@ export class VistaListarLibro extends Vista {
 
                     cardElement.addEventListener('click', () => {
                         this.obra = obra;
+                        
                         this.pulsarObra();
                     });
 
                     const detalleLink = document.createElement('button');
                     detalleLink.classList.add('card-button');
                     detalleLink.addEventListener('click', () => {
-                        this.redirigirAVistaDetalle(obra.id);
+                       
                     });
     
                     // Crear el elemento de la imagen usando el campo 'portada' de la obra
@@ -66,7 +67,7 @@ export class VistaListarLibro extends Vista {
     
                     // Añadir un manejador de eventos al hacer clic en la papelera
                     eliminarObra.onclick = () => {
-                        console.log(obra.id)
+                      
                         this.pulsarBorrar(obra.id);
                     };
     
@@ -100,12 +101,13 @@ export class VistaListarLibro extends Vista {
 
     async pulsarBorrar(idObra) {
         // Llamar al método borrarAutor con el id del autor
-        console.log("idObra: " + idObra)
+      
         await this.datos.borrarObra(idObra);
         this.controlador.pulsarLibro();
     }
 
     async pulsarObra(){ 
+     
         this.libroseleccionado = this.obra.id_autor
         const vistaListarAutor = new VistaListarAutor(this.controlador, this. base, this.obraseleccionada)
         vistaListarAutor.visualizarAutor()
