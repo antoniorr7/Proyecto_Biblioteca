@@ -24,77 +24,86 @@ export class VistaListarAutor extends Vista {
     async visualizarAutor() {
         const autores = await this.datos.mostrarAutor();
         this.listaMostrada = autores;
-
+    
         if (autores) {
             const scrollDiv = document.getElementById('scroll');
-
+    
             // Limpiar la tabla existente
             scrollDiv.innerHTML = '';
-
+    
             const tablaAutores = document.createElement('table');
             tablaAutores.classList.add('tabla');
-
+    
             autores.forEach((autor) => {
                 const filaAutor = document.createElement('tr');
-
+    
                 const imagenColumna = document.createElement('td');
                 imagenColumna.classList.add('imagen-columna');
-
+    
                 const imagenLink = document.createElement('a');
-
-
+    
                 const imagen = document.createElement('img');
                 imagen.src = autor.foto; // Así es como se asigna una imagen en formato Base64
                 imagen.alt = 'Descripción de la imagen';
-
+    
                 const nombreAutorLink = document.createElement('a');
-               
-
+    
                 const nombreAutorSpan = document.createElement('span');
                 nombreAutorSpan.classList.add('nombre-autor');
                 nombreAutorSpan.textContent = autor.nombre;
-
+    
                 nombreAutorLink.appendChild(imagen);
                 nombreAutorLink.appendChild(nombreAutorSpan);
                 imagenLink.appendChild(nombreAutorLink);
-
+    
                 imagenColumna.appendChild(imagenLink);
-
+    
                 const editorColumna = document.createElement('td');
                 editorColumna.classList.add('editor-columna');
-
-
+    
                 const eliminarLink = document.createElement('a');
-
+    
                 const eliminarImagen = document.createElement('img');
                 eliminarImagen.src = 'imagenes/papelera.png';
                 eliminarImagen.alt = 'Eliminar autor';
                 eliminarImagen.classList.add('editor');
-
+    
                 // Añadir un manejador de eventos al hacer clic en la papelera
-                eliminarLink.onclick = () => this.pulsarBorrar(autor.id); 
-
+                eliminarLink.onclick = () => this.pulsarBorrar(autor.id);
+    
                 eliminarLink.appendChild(eliminarImagen);
-
+    
+              
+    
+                const editarImagen = document.createElement('img');
+                editarImagen.src = 'imagenes/Lapiz.png'; // Asegúrate de tener la imagen correcta y la ruta correcta
+                editarImagen.alt = 'Editar autor';
+                editarImagen.classList.add('editor');
+    
+                // Añadir un manejador de eventos al hacer clic en el lápiz
+                editarImagen.onclick = () => this.pulsarEditar(autor);
+    
+               
+    
                 editorColumna.appendChild(eliminarLink);
-
+                editorColumna.appendChild(editarImagen); // Agrega el enlace de editar junto al de eliminar
+    
                 filaAutor.appendChild(imagenColumna);
                 filaAutor.appendChild(editorColumna);
-
+    
                 tablaAutores.appendChild(filaAutor);
+    
                 nombreAutorLink.addEventListener('click', () => {
-                    this.autor = autor
+                    this.autor = autor;
                     this.pulsarAutor();
                 });
-
             });
-
+    
             scrollDiv.appendChild(tablaAutores);
         } else {
             console.log('No se pudo obtener la lista de Autores');
         }
     }
-
     async pulsarCrear() {
         this.controlador.verVista(Vista.vistainsertarautor);
     }
@@ -112,5 +121,10 @@ export class VistaListarAutor extends Vista {
         vistaListarLibro.visualizarLibro();
         this.datosautor.rellenarAutor(this.autor)
         this.controlador.verVista(Vista.vistaautor)
+    }
+
+    async pulsarEditar(autor){
+        console.log(autor)
+        
     }
 }

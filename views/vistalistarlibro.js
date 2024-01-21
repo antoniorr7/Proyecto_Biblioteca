@@ -30,11 +30,7 @@ export class VistaListarLibro extends Vista {
                     const cardElement = document.createElement('div');
                     cardElement.classList.add('card');
 
-                    cardElement.addEventListener('click', () => {
-                        this.obra = obra;
-                        
-                        this.pulsarObra();
-                    });
+                    
 
                     const detalleLink = document.createElement('button');
                     detalleLink.classList.add('card-button');
@@ -46,7 +42,11 @@ export class VistaListarLibro extends Vista {
                     const portadaImage = document.createElement('img');
                     portadaImage.src = obra.portada; // Utiliza la ruta de la imagen directamente
                     portadaImage.alt = 'Descripción de la imagen';
-    
+                    portadaImage.addEventListener('click', () => {
+                        this.obra = obra;
+                        
+                        this.pulsarObra();
+                    });
                     // Agregar la imagen al enlace
                     detalleLink.appendChild(portadaImage);
     
@@ -71,10 +71,13 @@ export class VistaListarLibro extends Vista {
                         this.pulsarBorrar(obra.id);
                     };
     
-                    const lapizLink = document.createElement('a');
+                    const lapizLink = document.createElement('span');
                     lapizLink.href = 'formulario-libros.html';
                     lapizLink.innerHTML = `<img id="lapiz" src="imagenes/lapiz.png" alt="Editar">`;
-    
+                    lapizLink.onclick = () => {
+                      
+                        this.pulsarEditar(obra);
+                    };
                     // Agregar elementos al cardContent
                     cardContent.appendChild(obraElement);
                     cardContent.appendChild(eliminarObra);
@@ -113,5 +116,8 @@ export class VistaListarLibro extends Vista {
         vistaListarAutor.visualizarAutor()
         this.datosobra.rellenarObra(this.obra)
         this.controlador.verVista(Vista.vistalibro)
+    }
+    async pulsarEditar(obra){
+        console.log(obra)
     }
 }
