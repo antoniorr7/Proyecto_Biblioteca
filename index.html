@@ -340,6 +340,78 @@
 </div>
 
 </div>
+<div id="divEditarAutor">
+    <div class="body-form-libros">
+        <!-- Tabla de autores -->
+        <div class="titulo-form">
+            <h1>Formulario Autores</h1>
+        </div>
+        <div id="Cuerpo">
+            <div id="formulario">
+                <form  method="get" id="formularioAutor">
+                    <div class="marco-autores">
+                        <div class="espacio">
+                            <input type="number" name="id" id="id" class="borde" size="20" maxlength="20" hidden>
+                        </div>
+                        <div class="espacio">
+                            <label for="titulo">Nombre de Autor:</label>
+                            <input type="text" name="nombre" id="nombre" class="borde" size="20" maxlength="20">
+                        </div>
+                    </div>
+
+                    <div class="marco-autores">
+                        <div class="espacio">
+                            <label for="fecha_pub">Fecha de nacimiento:</label>
+                            <input type="date" name="fechaNacimiento" id=fechaNacimiento class="borde">
+                        </div>
+                    </div>
+
+                    <div class="marco-autores">
+                        <div class="espacio">
+                            <label for="fecha_pub">Fecha de fallecimiento:</label>
+                            <input type="date" name="fechaMuerte" id=fechaMuerte class="borde">
+                        </div>
+                    </div>
+
+                    <div class="marco-autores">
+                        <div id="nacionalidad" class="espacio">
+                            <label for="nacionalidad">
+                                Nacionalidad
+                            </label>
+
+
+                            <input id="nacionalidad" name="nacionalidad"  class="borde">
+                        </div>
+                    </div>
+
+                    <div class="marco-autores">
+                        <div id="biografia" class="espacio">
+                            <label for="texto">Biografía:</label>
+                            <textarea rows="2" cols="40" name="biografia" id="biografia"
+                                class="borde"></textarea><br>
+                        </div>
+                    </div>
+
+                    <div class="marco-autores">
+                        <div id="retrato" class="espacio">
+                            Retrato Autor:
+                            <input type="file" name="foto" class="borde">
+                        </div>
+                    </div>
+
+                    <div class="marco-autores">
+                        
+                    </div>
+                   
+                </form>
+                <button value="enviar" id="submit">
+                    enviar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
     <script type="module" src="controlador.js"></script>
 </body>
 

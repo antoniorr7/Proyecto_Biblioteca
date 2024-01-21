@@ -7,7 +7,7 @@ export class ModeloAutor {
     async mostrarAutor() {
         try {
             const autores = await this.rest.getAutor();
-            console.log('LISTA AUTORES:', autores);
+
             return autores;
         } catch (error) {
             console.error('Error al obtener la lista de autores:', error);
@@ -53,5 +53,17 @@ export class ModeloAutor {
             return null;
         }
     }
-    
+    async editarAutor(autorData) {
+        try
+        {
+            console.log('modelo',autorData);
+            const respuesta = await this.rest.actualizarAutor(autorData);
+     
+            console.log('Autor modificado exitosamente:', respuesta);
+        }catch(error){
+            console.log(error);
+        }
+      
+       
+    }
   }

@@ -3,6 +3,7 @@ import { Vista } from './vista.js';
 import { ModeloAutor } from '../models/modeloautor.js';
 import { VistaAutor } from '../views/vistaautor.js';
 import { VistaListarLibro } from '../views/vistalistarlibro.js';
+import { VistaEditarAutor } from './vistaeditarautor.js';
 
 // Definir la clase VistaListarAutor
 export class VistaListarAutor extends Vista {
@@ -124,7 +125,9 @@ export class VistaListarAutor extends Vista {
     }
 
     async pulsarEditar(autor){
-        console.log(autor)
-        
+        this.controlador.verVista(Vista.vistaeditarautor)
+        const vistaEditarAutor = new VistaEditarAutor(autor)
+        vistaEditarAutor.rellenar(autor)
+       
     }
 }

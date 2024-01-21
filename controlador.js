@@ -8,6 +8,7 @@ import { VistaInsertarLibro } from './views/vistainsertarlibro.js'
 import { VistaInformacion } from './views/vistainformacion.js'
 import { VistaLibro } from './views/vistalibro.js'
 import { VistaAutor } from './views/vistaautor.js'
+import { VistaEditarAutor } from './views/vistaeditarautor.js'
 import { Vista } from './views/vista.js';
 
 export class Controlador {
@@ -28,6 +29,10 @@ export class Controlador {
         const  divInformacion = document.getElementById('divInformacion')
         const  divLibro = document.getElementById('divLibro')
         const  divAutor = document.getElementById('divAutor')
+        const  divEditarAutor = document.getElementById('divEditarAutor')
+        
+        
+
     
         //Creamos las vistas 
         this.vistas.set(Vista.vmenuinicial, new MenuInicial(this, divMenuInicial))
@@ -38,6 +43,7 @@ export class Controlador {
         this.vistas.set(Vista.vistainformacion, new VistaInformacion (this, divInformacion))
         this.vistas.set(Vista.vistalibro, new VistaLibro (this, divLibro))
         this.vistas.set(Vista.vistaautor, new VistaAutor (this, divAutor))
+        this.vistas.set(Vista.vistaeditarautor, new VistaEditarAutor (this, divEditarAutor))
 
         
         this.verVista(Vista.vmenuinicial)

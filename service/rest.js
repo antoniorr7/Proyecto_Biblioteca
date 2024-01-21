@@ -57,6 +57,7 @@ export class Rest {
 
     async actualizarAutor(autorData) {
         try {
+            console.log('en rest:', autorData);  
             const url = `${this.baseUrl}/autor`;
             const response = await fetch(url, {
                 method: 'PUT',
