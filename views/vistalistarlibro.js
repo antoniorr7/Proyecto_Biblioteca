@@ -4,28 +4,12 @@ import { VistaLibro } from '../views/vistalibro.js';
 import { VistaListarAutor } from '../views/vistalistarautor.js';
 
 // Función para establecer una cookie
-function setCookie(nombre, valor, dias) {
-    const fechaExpiracion = new Date();
-    fechaExpiracion.setTime(fechaExpiracion.getTime() + (dias * 24 * 60 * 60 * 1000));
-    const expira = "expires=" + fechaExpiracion.toUTCString();
-    document.cookie = nombre + "=" + valor + ";" + expira + ";path=/";
+function colocarCookie(nombre, valor) {
+    document.cookie = nombre + "=" + valor + ";path=/";
 }
 
 // Función para obtener el valor de una cookie por nombre
-function getCookie(nombre) {
-    const nombreCookie = nombre + "=";
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i];
-        while (cookie.charAt(0) == ' ') {
-            cookie = cookie.substring(1);
-        }
-        if (cookie.indexOf(nombreCookie) == 0) {
-            return cookie.substring(nombreCookie.length, cookie.length);
-        }
-    }
-    return "";
-}
+
 
 export class VistaListarLibro extends Vista {
     constructor(controlador, base, autorseleccionado) {
@@ -41,10 +25,10 @@ export class VistaListarLibro extends Vista {
         this.libroseleccionado = null; // Inicializar correctamente
     }   
 
-    toggleFavorito(idLibro, favLibro) {
-        const isFavorito = getCookie(`fav_${idLibro}`) === 'true';
+    cambiarEstadoLibro(idLibro, favLibro) {
+        const libroFavorito = this.comprobarCookie('Id_Libro_Fav_' + idLibro) === 'true';
 
-        if (isFavorito) {
+        if (libroFavorito) {
             this.quitarFavorito(idLibro, favLibro);
         } else {
             this.agregarFavorito(idLibro, favLibro);
@@ -54,13 +38,34 @@ export class VistaListarLibro extends Vista {
     // Función para agregar un libro a favoritos
     agregarFavorito(idLibro, favLibro) {
         favLibro.src = 'imagenes/favorite.png';
-        setCookie(`fav_${idLibro}`, 'true', 30);
+        colocarCookie('Id_Libro_Fav_' + idLibro, 'true', 30);
     }
 
     // Función para quitar un libro de favoritos
     quitarFavorito(idLibro, favLibro) {
         favLibro.src = 'imagenes/favorite01.png';
-        setCookie(`fav_${idLibro}`, 'false', 30);
+        colocarCookie('Id_Libro_Fav_' + idLibro, 'false', 30);
+        //No entiendo para que es el valor de las cookies
+    }
+
+    comprobarCookie(nombre) {
+        const nombreCookie = nombre + "=";
+        const cookies = document.cookie.split(";");
+        console.log(cookies);
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i]; //Saca cada elemento del array
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1); //Esto nos elimina los espacios en blanco que hay al principio
+            }
+            if (cookie.indexOf(nombreCookie) == 0) {
+                return cookie.substring(nombreCookie.length, cookie.length);
+    
+                //nombre de la cookie = Id_Libro_Fav_1=
+                //cookie = Id_Libro_Fav_1=true
+                //esto nos devolvera true o false ( para comprobar si la cookie esta activa o no)
+            }
+        }
+        return "";
     }
 
     async visualizarLibro() {
@@ -122,12 +127,12 @@ export class VistaListarLibro extends Vista {
                     };
 
                     const favLibro = document.createElement('img');
-                    favLibro.src = getCookie(`fav_${obra.id}`) === 'true' ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
+                    favLibro.src = this.comprobarCookie('Id_Libro_Fav_' + obra.id) === 'true' ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
                     favLibro.id = 'papelera';
                     favLibro.classList.add('editor');
                     
                     favLibro.onclick = () => {
-                        this.toggleFavorito(obra.id, favLibro);
+                        this.cambiarEstadoLibro(obra.id, favLibro);
                     };
 
                     // Agregar elementos al cardContent
@@ -171,6 +176,5 @@ export class VistaListarLibro extends Vista {
 
     async pulsarEditar(obra) {
         console.log(obra);
-        // Implementa la lógica para editar la obra
     }
 }
