@@ -53,4 +53,14 @@ export class ModeloObra {
             return null;
         }
     }
+    async editarObra(obraData) {
+        try {
+            console.log('modelo', obraData);
+            const respuesta = await this.rest.actualizarObra(obraData);
+     
+            console.log('Obra modificada exitosamente:', respuesta);
+        } catch (error) {
+            console.log(error);
+        }
+    }
   }

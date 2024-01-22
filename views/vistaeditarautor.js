@@ -51,11 +51,12 @@ export class VistaEditarAutor extends Vista {
     }
 
     // Llenar el campo de foto
-    const retratoDiv = divEditarAutor.querySelector('#retrato');
-    if (retratoDiv) {
+    const portadaDiv = divEditarLibro.querySelector('#portada');
+    if (portadaDiv) {
         // Supongamos que tienes una imagen en base64, puedes asignarla al atributo 'src' de un elemento 'img'.
-        retratoDiv.innerHTML = `<img src="${autor.foto}" alt="Retrato del autor" style='width:100px; height:auto; object-fit:cover; border-radius:5px; margin-bottom:10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);' >`;
+        portadaDiv.innerHTML = `<img src="${libro.portada}" alt="Portada del libro" style='width:100px; height:auto; object-fit:cover; border-radius:5px; margin-bottom:10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);' >`;
     }
+    
 
     
   const enviar =divEditarAutor.querySelector('#submit')

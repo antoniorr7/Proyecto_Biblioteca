@@ -2,7 +2,7 @@ import { Vista } from './vista.js';
 import { ModeloObra } from '../models/modeloobra.js';
 import { VistaLibro } from '../views/vistalibro.js';
 import { VistaListarAutor } from '../views/vistalistarautor.js';
-
+import { VistaEditarLibro } from '../views/vistaeditarlibro.js';
 // Función para establecer una cookie
 function colocarCookie(nombre, valor) {
     document.cookie = nombre + "=" + valor + ";path=/";
@@ -174,7 +174,10 @@ export class VistaListarLibro extends Vista {
         this.controlador.verVista(Vista.vistalibro);
     }
 
-    async pulsarEditar(obra) {
-        console.log(obra);
+    async pulsarEditar(obra){
+        this.controlador.verVista(Vista.vistaeditarlibro)
+        const vistaEditarLibro = new VistaEditarLibro(obra)
+        vistaEditarLibro.rellenar(obra)
+       console.log(obra)
     }
 }
