@@ -82,11 +82,7 @@ export class VistaListarLibro extends Vista {
                     const cardElement = document.createElement('div');
                     cardElement.classList.add('card');
 
-                    const detalleLink = document.createElement('button');
-                    detalleLink.classList.add('card-button');
-                    detalleLink.addEventListener('click', () => {
-                        // Implementa la lógica que desees al hacer clic en la obra
-                    });
+                    
     
                     // Crear el elemento de la imagen usando el campo 'portada' de la obra
                     const portadaImage = document.createElement('img');
@@ -98,11 +94,14 @@ export class VistaListarLibro extends Vista {
                     });
 
                     // Agregar la imagen al enlace
-                    detalleLink.appendChild(portadaImage);
+                    cardElement.appendChild(portadaImage);
     
                     // Crear un div para el contenido de la card
                     const cardContent = document.createElement('div');
                     cardContent.classList.add('card-content');
+
+                    const opciones = document.createElement('div');
+                    opciones.classList.add('opciones');
     
                     // Crear un h3 para el título de la obra
                     const obraElement = document.createElement('h3');
@@ -120,12 +119,16 @@ export class VistaListarLibro extends Vista {
                         this.pulsarBorrar(obra.id);
                     };
     
-                    const lapizLink = document.createElement('span');
-                    lapizLink.href = 'formulario-libros.html';
-                    lapizLink.innerHTML = `<img id="lapiz" src="imagenes/edit.png" alt="Editar">`;
+
+                    const lapizLink = document.createElement('img');
+                    lapizLink.src = 'imagenes/edit.png';
+                    lapizLink.alt = 'Editar Obra';
+                    lapizLink.id = 'papelera';
+                    lapizLink.classList.add('editor');
                     lapizLink.onclick = () => {
                         this.pulsarEditar(obra);
                     };
+                    
 
                     const favLibro = document.createElement('img');
                     favLibro.src = this.comprobarCookie('Id_Libro_Fav_' + obra.id) === 'true' ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
@@ -137,16 +140,16 @@ export class VistaListarLibro extends Vista {
                     };
 
                     // Agregar elementos al cardContent
+                    
                     cardContent.appendChild(obraElement);
-                    cardContent.appendChild(eliminarObra);
-                    cardContent.appendChild(lapizLink);
-                    cardContent.appendChild(favLibro);
+                    
     
                     // Agregar elementos al cardElement
-                    cardElement.appendChild(detalleLink);
                     cardElement.appendChild(cardContent);
-                    cardElement.appendChild(favLibro);
-    
+                    cardContent.appendChild(opciones)
+                    opciones.appendChild(eliminarObra);
+                    opciones.appendChild(lapizLink);
+                    opciones.appendChild(favLibro);
                     // Agregar la card al divScrollLateral
                     divScrollLateral.appendChild(cardElement);
                 });

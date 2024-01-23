@@ -22,6 +22,49 @@ export class VistaListarAutor extends Vista {
         this.autorseleccionado
     }
 
+    cambiarEstadoAutor(idAutor, favAutor) {
+        const autorFavorito = this.comprobarCookie('Id_Autor_Fav_' + idAutor) === 'true';
+
+        if (autorFavorito) {
+            this.quitarFavorito(idAutor, favAutor);
+        } else {
+            this.agregarFavorito(idAutor, favAutor);
+        }
+    }
+
+    agregarFavorito(idAutor, favAutor) {
+        favAutor.src = 'imagenes/favorite.png';
+        this.colocarCookie('Id_Autor_Fav_' + idAutor, 'true', 30);
+    }
+
+    colocarCookie(nombre, valor) {
+        document.cookie = nombre + "=" + valor + ";path=/";
+    }
+
+    // Función para quitar un libro de favoritos
+    quitarFavorito(idAutor, favAutor) {
+        favAutor.src = 'imagenes/favorite01.png';
+        this.colocarCookie('Id_Autor_Fav_' + idAutor, 'false', 30);
+        //No entiendo para que es el valor de las cookies
+    }
+
+    comprobarCookie(nombre) {
+        const nombreCookie = nombre + "=";
+        console.log(nombreCookie)
+        const cookies = document.cookie.split(";");
+        console.log(cookies)
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i]; //Saca cada elemento del array
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1); //Esto nos elimina los espacios en blanco que hay al principio
+            }
+            if (cookie.indexOf(nombreCookie) == 0) {
+                return cookie.substring(nombreCookie.length, cookie.length);
+            }
+        }
+        return "";
+    }
+
     async visualizarAutor() {
         const autores = await this.datos.mostrarAutor();
         this.listaMostrada = autores;
@@ -41,28 +84,29 @@ export class VistaListarAutor extends Vista {
                 const imagenColumna = document.createElement('td');
                 imagenColumna.classList.add('imagen-columna');
     
-                const imagenLink = document.createElement('a');
+                const imagenLink = document.createElement('div');
+                imagenLink.classList.add('divAutores');
     
                 const imagen = document.createElement('img');
                 imagen.src = autor.foto; // Así es como se asigna una imagen en formato Base64
                 imagen.alt = 'Descripción de la imagen';
     
-                const nombreAutorLink = document.createElement('a');
+                
     
                 const nombreAutorSpan = document.createElement('span');
                 nombreAutorSpan.classList.add('nombre-autor');
                 nombreAutorSpan.textContent = autor.nombre;
     
-                nombreAutorLink.appendChild(imagen);
-                nombreAutorLink.appendChild(nombreAutorSpan);
-                imagenLink.appendChild(nombreAutorLink);
+                imagenLink.appendChild(imagen);
+                imagenLink.appendChild(nombreAutorSpan);
     
                 imagenColumna.appendChild(imagenLink);
     
                 const editorColumna = document.createElement('td');
                 editorColumna.classList.add('editor-columna');
     
-                const eliminarLink = document.createElement('a');
+                const editores = document.createElement('div');
+                editores.classList.add('editores');
     
                 const eliminarImagen = document.createElement('img');
                 eliminarImagen.src = 'imagenes/delete.png';
@@ -70,11 +114,21 @@ export class VistaListarAutor extends Vista {
                 eliminarImagen.classList.add('editor');
     
                 // Añadir un manejador de eventos al hacer clic en la papelera
-                eliminarLink.onclick = () => this.pulsarBorrar(autor.id);
+                eliminarImagen.onclick = () => this.pulsarBorrar(autor.id);
     
-                eliminarLink.appendChild(eliminarImagen);
+
+                imagenColumna.appendChild(editores);
+                editores.appendChild(eliminarImagen);
     
               
+                const favAutor = document.createElement('img');
+                favAutor.src = this.comprobarCookie('Id_Autor_Fav_' + autor.id) === 'true' ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
+                
+                favAutor.classList.add('editor');
+                
+                favAutor.onclick = () => {
+                    this.cambiarEstadoAutor(autor.id, favAutor);
+                };
     
                 const editarImagen = document.createElement('img');
                 editarImagen.src = 'imagenes/edit.png'; // Asegúrate de tener la imagen correcta y la ruta correcta
@@ -84,17 +138,16 @@ export class VistaListarAutor extends Vista {
                 // Añadir un manejador de eventos al hacer clic en el lápiz
                 editarImagen.onclick = () => this.pulsarEditar(autor);
     
-               
+                editores.appendChild(editarImagen);
+                editores.appendChild(favAutor);
     
-                editorColumna.appendChild(eliminarLink);
-                editorColumna.appendChild(editarImagen); // Agrega el enlace de editar junto al de eliminar
+                 // Agrega el enlace de editar junto al de eliminar
     
                 filaAutor.appendChild(imagenColumna);
-                filaAutor.appendChild(editorColumna);
     
                 tablaAutores.appendChild(filaAutor);
     
-                nombreAutorLink.addEventListener('click', () => {
+                imagenLink.addEventListener('click', () => {
                     this.autor = autor;
                     this.pulsarAutor();
                 });
