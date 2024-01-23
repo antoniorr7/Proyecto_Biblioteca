@@ -22,14 +22,14 @@
     "sentencias": {
         "insertar_autor": "INSERT INTO Autor (nombre, fechaNacimiento, fechaMuerte, biografia, foto, nacionalidad) VALUES (:nombre, :fechaNacimiento, :fechaMuerte, :biografia, :foto, :nacionalidad);",
         "listar_autores_basico": "SELECT * FROM Autor;",
-        "actualizar_autor": "UPDATE Autor SET nombre = :nuevoNombre, fechaNacimiento = :nuevaFechaNacimiento, fechaMuerte = :nuevaFechaMuerte, biografia = :nuevaBiografia, foto = :nuevaFoto, nacionalidad = :nuevaNacionalidad WHERE id = :id_autor;",
+        "actualizar_autor": "UPDATE Autor SET nombre = :nombre, fechaNacimiento = :fechaNacimiento, fechaMuerte = :fechaMuerte, biografia = :biografia, foto = :foto, nacionalidad = :nacionalidad WHERE id = :id;",
         "borrar_autor": "DELETE FROM Autor WHERE id = :id;",
         "listar_autores_avanzado": "SELECT id, nombre, fechaNacimiento, fechaMuerte, biografia, nacionalidad FROM Autor;",
         "borrar_autor_Libro": "DELETE FROM Autor_Libro WHERE id_autor = :id_autor;",
         "insertar_Libro_autor": "INSERT INTO Autor_Libro (id_autor, id_Libro) VALUES (:id_autor, :idLibro);",
         "insertar_obra": "INSERT INTO Obra (titulo, id_autor, fecha_publicacion, reseña, portada, genero) VALUES (:titulo, :id_autor, :fecha_publicacion, :reseña, :portada, :genero);",
         "listar_obras_basico": "SELECT * FROM Obra;",
-        "actualizar_obra": "UPDATE Obra SET titulo = :nuevoTitulo, id_autor = :nuevoid_autor, fecha_publicacion = :nuevaFechaPublicacion, descripcion = :nuevaDescripcion, reseña = :nuevaResena, portada = :nuevaPortada, genero = :nuevoGenero WHERE id = :idLibro;",
+        "actualizar_obra": "UPDATE Obra SET titulo = :titulo, id_autor = :id_autor, fecha_publicacion = :fecha_publicacion, portada = :portada, reseña = :reseña, genero = :genero WHERE id = :id;",
         "borrar_obra": "DELETE FROM Obra WHERE id = :id;",
         "listar_obras_avanzado": "SELECT id, titulo, id_autor, fecha_publicacion, reseña, genero FROM Obra;"
     }

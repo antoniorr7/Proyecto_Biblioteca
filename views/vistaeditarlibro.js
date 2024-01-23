@@ -56,11 +56,7 @@ export class VistaEditarLibro extends Vista {
       fechaPublicacionInput.value = libro.fecha_publicacion;
     }
 
-    // Llenar el campo de descripción
-    const descripcionTextarea = divEditarLibro.querySelector('#texto_desc');
-    if (descripcionTextarea) {
-      descripcionTextarea.value = libro.reseña;
-    }
+  
 
 
 
@@ -91,7 +87,6 @@ export class VistaEditarLibro extends Vista {
             titulo: divEditarLibro.querySelector('#titulo').value,
             id_autor: divEditarLibro.querySelector('[name="autor"]').value,
             fecha_publicacion: divEditarLibro.querySelector('#fecha').value,
-            descripcion: divEditarLibro.querySelector('#texto_desc').value,
             portada: portadaImg ? portadaImg.getAttribute('src') : '', // Obtener el atributo 'src' de la imagen
             reseña: divEditarLibro.querySelector('#reseña').value,
             genero: divEditarLibro.querySelector('[name="genero"]').value,
