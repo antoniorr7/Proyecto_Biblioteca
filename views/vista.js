@@ -9,6 +9,7 @@ export class Vista {
       Vista.vistalibro = Symbol('Libro')
       Vista.vistaautor = Symbol('Autor')
       Vista.vistaeditarautor = Symbol('Editar Autor')
+      Vista.vistaeditarlibro = Symbol('Editar Libro')
     }
   
     constructor(controlador, base) {

@@ -29,7 +29,7 @@
         "insertar_Libro_autor": "INSERT INTO Autor_Libro (id_autor, id_Libro) VALUES (:id_autor, :idLibro);",
         "insertar_obra": "INSERT INTO Obra (titulo, id_autor, fecha_publicacion, reseña, portada, genero) VALUES (:titulo, :id_autor, :fecha_publicacion, :reseña, :portada, :genero);",
         "listar_obras_basico": "SELECT * FROM Obra;",
-        "actualizar_obra": "UPDATE Obra SET titulo = :nuevoTitulo, id_autor = :nuevoid_autor, fecha_publicacion = :nuevaFechaPublicacion, reseña = :nuevaResena, portada = :nuevaPortada, genero = :nuevoGenero WHERE id = :idLibro;",
+        "actualizar_obra": "UPDATE Obra SET titulo = :nuevoTitulo, id_autor = :nuevoid_autor, fecha_publicacion = :nuevaFechaPublicacion, descripcion = :nuevaDescripcion, reseña = :nuevaResena, portada = :nuevaPortada, genero = :nuevoGenero WHERE id = :idLibro;",
         "borrar_obra": "DELETE FROM Obra WHERE id = :id;",
         "listar_obras_avanzado": "SELECT id, titulo, id_autor, fecha_publicacion, reseña, genero FROM Obra;"
     }

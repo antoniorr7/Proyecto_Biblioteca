@@ -65,7 +65,7 @@ export class VistaListarAutor extends Vista {
                 const eliminarLink = document.createElement('a');
     
                 const eliminarImagen = document.createElement('img');
-                eliminarImagen.src = 'imagenes/papelera.png';
+                eliminarImagen.src = 'imagenes/delete.png';
                 eliminarImagen.alt = 'Eliminar autor';
                 eliminarImagen.classList.add('editor');
     
@@ -77,7 +77,7 @@ export class VistaListarAutor extends Vista {
               
     
                 const editarImagen = document.createElement('img');
-                editarImagen.src = 'imagenes/Lapiz.png'; // Asegúrate de tener la imagen correcta y la ruta correcta
+                editarImagen.src = 'imagenes/edit.png'; // Asegúrate de tener la imagen correcta y la ruta correcta
                 editarImagen.alt = 'Editar autor';
                 editarImagen.classList.add('editor');
     
