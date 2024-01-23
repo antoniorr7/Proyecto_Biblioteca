@@ -1,12 +1,11 @@
 import { Vista } from './vista.js';
-import { Rest } from '../service/rest.js';
 import { ModeloAutor } from '../models/modeloautor.js';
 
 
 export class VistaInsertarAutor extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
-    this.rest = new Rest();
+
     this.modeloautor = new ModeloAutor();
 
     const formulario = document.getElementById('formularioAutor');
