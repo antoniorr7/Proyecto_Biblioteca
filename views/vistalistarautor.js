@@ -17,10 +17,10 @@ export class VistaListarAutor extends Vista {
 
 
         this.seleccionados = new Set();
-        this.checkboxSeleccionarAutor = document.getElementById('seleccionar-todos');
+        this.checkboxSeleccionarAutor = document.getElementById('seleccionar-autores');
         this.checkboxSeleccionarAutor.addEventListener('change', this.toggleSeleccionarTodosAutor.bind(this));
 
-        const borrarSeleccionados = document.getElementById('borrar-seleccionados');
+        const borrarSeleccionados = document.getElementById('borrar-autores');
         borrarSeleccionados.addEventListener('click', this.borrarAutoresSeleccionados.bind(this));
         
         
