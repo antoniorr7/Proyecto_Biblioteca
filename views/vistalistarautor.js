@@ -1,26 +1,74 @@
-// Importar las clases necesarias
 import { Vista } from './vista.js';
 import { ModeloAutor } from '../models/modeloautor.js';
 import { VistaAutor } from '../views/vistaautor.js';
 import { VistaListarLibro } from '../views/vistalistarlibro.js';
 import { VistaEditarAutor } from './vistaeditarautor.js';
 
-// Definir la clase VistaListarAutor
 export class VistaListarAutor extends Vista {
     constructor(controlador, base, libroseleccionado) {
         super(controlador, base);
         this.datos = new ModeloAutor();
         this.datosautor = new VistaAutor();
         this.libroseleccionado = libroseleccionado;
-
         this.listaMostrada = [];
 
-        
         const crear = document.getElementById('añadir-autor');
-        crear.onclick = this.pulsarCrear.bind(this);
-        this.autor
-        this.autorseleccionado
+        crear.addEventListener('click', this.pulsarCrear.bind(this));
+
+
+        this.seleccionados = new Set();
+        this.checkboxSeleccionarAutor = document.getElementById('seleccionar-autores');
+        this.checkboxSeleccionarAutor.addEventListener('change', this.toggleSeleccionarTodosAutor.bind(this));
+
+        const borrarSeleccionados = document.getElementById('borrar-autores');
+        borrarSeleccionados.addEventListener('click', this.borrarAutoresSeleccionados.bind(this));
+        
+        
+        this.autor = null;
+        this.autorseleccionado = null;
     }
+    
+    toggleSeleccionarTodosAutor() {
+        const checkboxEstado = this.checkboxSeleccionarAutor.checked;
+        this.seleccionados.clear(); // Limpiar selección actual
+    
+        if (checkboxEstado) {
+            this.seleccionados = new Set(this.listaMostrada.map(autor => autor.id));
+        }
+    
+        this.actualizarEstadoBotonBorrar();
+    }
+    
+
+    toggleSeleccionarAutor(idAutor) {
+        this.seleccionados.has(idAutor) ? this.seleccionados.delete(idAutor) : this.seleccionados.add(idAutor);
+    
+        // Actualizar el estado del checkbox "Seleccionar todos"
+        this.checkboxSeleccionarAutor.checked = this.seleccionados.size === this.listaMostrada.length;
+    
+        this.actualizarEstadoBotonBorrar();
+    }
+    
+
+    actualizarEstadoBotonBorrar() {
+        const borrarSeleccionados = document.getElementById('borrar-seleccionados');
+        borrarSeleccionados.disabled = this.seleccionados.size === 0;
+    }
+
+    async borrarAutoresSeleccionados() {
+        if (this.seleccionados.size === 0) {
+            alert('Selecciona al menos un autor para borrar.');
+            return;
+        }
+    
+        if (confirm('¿Estás seguro de que deseas borrar los autores seleccionadas?')) {
+            const idsSeleccionados = Array.from(this.seleccionados);
+            await this.datos.borrarAutor(idsSeleccionados);
+            this.controlador.pulsarAutor();
+        }
+    }
+    
+    
 
     cambiarEstadoAutor(idAutor, favAutor) {
         const autorFavorito = this.comprobarCookie('Id_Autor_Fav_' + idAutor) === 'true';
@@ -91,7 +139,11 @@ export class VistaListarAutor extends Vista {
                 imagen.src = autor.foto; // Así es como se asigna una imagen en formato Base64
                 imagen.alt = 'Descripción de la imagen';
     
-                
+                // Añadir checkbox para seleccionar el autor
+                const checkboxSeleccion = document.createElement('input');
+                checkboxSeleccion.type = 'checkbox';
+                checkboxSeleccion.addEventListener('change', () => this.toggleSeleccionarAutor(autor.id));
+                imagenColumna.appendChild(checkboxSeleccion);
     
                 const nombreAutorSpan = document.createElement('span');
                 nombreAutorSpan.classList.add('nombre-autor');
@@ -169,18 +221,17 @@ export class VistaListarAutor extends Vista {
         this.controlador.pulsarAutor();
     }
 
-    async pulsarAutor(){ 
-        this.autorseleccionado = this.autor.id;
-        const vistaListarLibro = new VistaListarLibro(this.controlador, this.base, this.autorSeleccionadoId);
+    async pulsarAutor() {
+        this.autorseleccionado = this.autor ? this.autor.id : null; // Corregir error en la propiedad
+        const vistaListarLibro = new VistaListarLibro(this.controlador, this.base, this.autorseleccionado);
         vistaListarLibro.visualizarLibro();
-        this.datosautor.rellenarAutor(this.autor)
-        this.controlador.verVista(Vista.vistaautor)
+        this.datosautor.rellenarAutor(this.autor);
+        this.controlador.verVista(Vista.vistaautor);
     }
 
-    async pulsarEditar(autor){
-        this.controlador.verVista(Vista.vistaeditarautor)
-        const vistaEditarAutor = new VistaEditarAutor(autor)
-        vistaEditarAutor.rellenar(autor, this.controlador)
-       
+    async pulsarEditar(autor) {
+        this.controlador.verVista(Vista.vistaeditarautor);
+        const vistaEditarAutor = new VistaEditarAutor(autor);
+        vistaEditarAutor.rellenar(autor, this.controlador);
     }
 }

@@ -18,12 +18,66 @@ export class VistaListarLibro extends Vista {
         this.datosobra = new VistaLibro();
         this.autorseleccionado = autorseleccionado;
 
+        this.listaMostrada = [];
+
         const crear = document.getElementById('crearLibro')
         crear.onclick = this.pulsarCrear.bind(this);
 
+        this.seleccionados = new Set()
+        this.checkboxSeleccionarTodasObras = document.getElementById('seleccionar-todos');
+        this.checkboxSeleccionarTodasObras.addEventListener('change', this.seleccionarTodasObras.bind(this));
+
+        const borrarSeleccionados = document.getElementById('borrar-seleccionados');
+        borrarSeleccionados.addEventListener('click', this.borrarObrasSeleccionadas.bind(this));
+        
         this.obra = null; // Inicializar correctamente
         this.libroseleccionado = null; // Inicializar correctamente
     }   
+
+
+
+    seleccionarTodasObras() {
+        const checkboxEstado = this.checkboxSeleccionarTodasObras.checked;
+        this.seleccionados.clear();
+
+        if (checkboxEstado) {
+            this.listaMostrada.forEach((obra) => {
+                this.seleccionados.add(obra.id);
+            });
+        }
+
+        this.actualizarEstadoBotonBorrar();
+    }
+
+    seleccionarObra(idObra) {
+        if (this.seleccionados.has(idObra)) {
+            this.seleccionados.delete(idObra);
+        } else {
+            this.seleccionados.add(idObra);
+        }
+
+        this.checkboxSeleccionarTodasObras.checked = this.seleccionados.size === this.listaMostrada.length;
+
+        this.actualizarEstadoBotonBorrar();
+    }
+
+    actualizarEstadoBotonBorrar() {
+        const borrarSeleccionados = document.getElementById('borrar-seleccionados');
+        borrarSeleccionados.disabled = this.seleccionados.size === 0;
+    }
+
+    async borrarObrasSeleccionadas() {
+        if (this.seleccionados.size === 0) {
+            alert('Selecciona al menos una obra para borrar.');
+            return;
+        }
+    
+        if (confirm('¿Estás seguro de que deseas borrar las obras seleccionadas?')) {
+            const idsSeleccionados = Array.from(this.seleccionados);
+            await this.datos.borrarObra(idsSeleccionados);
+            this.controlador.pulsarLibro();
+        }
+    }
 
     cambiarEstadoLibro(idLibro, favLibro) {
         const libroFavorito = this.comprobarCookie('Id_Libro_Fav_' + idLibro) === 'true';
@@ -70,7 +124,12 @@ export class VistaListarLibro extends Vista {
     }
 
     async visualizarLibro() {
+        
+
+        this.listaMostrada = obras;
         try {
+            this.listaMostrada = await this.datos.mostrarObra() || [];
+
             const obras = await this.datos.mostrarObra();
     
             if (obras) {
@@ -119,7 +178,6 @@ export class VistaListarLibro extends Vista {
                         this.pulsarBorrar(obra.id);
                     };
     
-
                     const lapizLink = document.createElement('img');
                     lapizLink.src = 'imagenes/edit.png';
                     lapizLink.alt = 'Editar Obra';
@@ -129,6 +187,10 @@ export class VistaListarLibro extends Vista {
                         this.pulsarEditar(obra);
                     };
                     
+                    // Añadir checkbox para seleccionar el autor
+                    const checkboxSeleccion = document.createElement('input');
+                    checkboxSeleccion.type = 'checkbox';
+                    checkboxSeleccion.addEventListener('change', () => this.seleccionarObra(obra.id));
 
                     const favLibro = document.createElement('img');
                     favLibro.src = this.comprobarCookie('Id_Libro_Fav_' + obra.id) === 'true' ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
@@ -145,6 +207,7 @@ export class VistaListarLibro extends Vista {
                     
     
                     // Agregar elementos al cardElement
+                    cardElement.appendChild(checkboxSeleccion)
                     cardElement.appendChild(cardContent);
                     cardContent.appendChild(opciones)
                     opciones.appendChild(eliminarObra);

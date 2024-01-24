@@ -27,8 +27,8 @@ export class ModeloObra {
         }
     }
 
-    async borrarObra(id){
-      const respuesta = await this.rest.borrarObra(id)
+    async borrarObra(ids){
+      const respuesta = await this.rest.borrarObra(ids)
       
       if (respuesta) {
           console.log('Obra borrado exitosamente:', respuesta);
