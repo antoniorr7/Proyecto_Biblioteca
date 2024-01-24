@@ -49,16 +49,11 @@ export class VistaEditarLibro extends Vista {
             });
     }
     
-
     // Llenar el campo de fecha de publicación
     const fechaPublicacionInput = divEditarLibro.querySelector('#fecha');
     if (fechaPublicacionInput) {
       fechaPublicacionInput.value = libro.fecha_publicacion;
     }
-
-  
-
-
 
     // Llenar el campo de reseña
     const reseñaInput = divEditarLibro.querySelector('#reseña');
@@ -78,6 +73,25 @@ export class VistaEditarLibro extends Vista {
         portadaDiv.innerHTML = `<img src="${libro.portada}" alt="Portada del libro" style='width:100px; height:auto; margin-bottom:10px;  object-fit:cover; border-radius:5px; margin-bottom:10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);' >`;
     }
     
+    const portadaNueva = divEditarLibro.querySelector('#nuevaportada');
+    if (portadaNueva) {
+        portadaNueva.addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+    
+            if (file) {
+                const reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    const imgElement = portadaDiv.querySelector('img');
+                    imgElement.src = e.target.result; // Asignar la nueva imagen en base64 al 'src' del elemento 'img'.
+                };
+    
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
     // Evento para el botón de enviar
     const enviar = divEditarLibro.querySelector('#submit');
     enviar.onclick = () => {
@@ -94,7 +108,7 @@ export class VistaEditarLibro extends Vista {
         this.enviarLibro(libroData);
         controlador.pulsarLibro()
     };
-    
+ 
   }
 
   enviarLibro(libro) {

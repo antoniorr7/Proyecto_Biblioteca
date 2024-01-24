@@ -52,15 +52,31 @@ export class VistaEditarAutor extends Vista {
     if (biografiaTextarea) {
         biografiaTextarea.value = autor.biografia;
     }
+// Llenar el campo de foto
+const foto = divEditarAutor.querySelector('#retrato');
+if (autor.foto) {
+    // Supongamos que tienes una imagen en base64, puedes asignarla al atributo 'src' de un elemento 'img'.
+    foto.innerHTML = `<img src="${autor.foto}" alt="Retrato del autor" style='width:100px; height:auto; object-fit:cover; border-radius:5px; margin-bottom:10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);' >`;
+}
 
-    // Llenar el campo de foto
-    const foto = divEditarAutor.querySelector('#retrato');
-    if (autor.foto) {
-        // Supongamos que tienes una imagen en base64, puedes asignarla al atributo 'src' de un elemento 'img'.
-        foto.innerHTML = `<img src="${autor.foto}" alt="Portada del libro" style='width:100px; height:auto; object-fit:cover; border-radius:5px; margin-bottom:10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);' >`;
-     
-      }
-    
+const nuevoRetratoInput = divEditarAutor.querySelector('#nuevoretrato');
+if (nuevoRetratoInput) {
+    nuevoRetratoInput.addEventListener('change', function (event) {
+        const fileInput = event.target;
+        const file = fileInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const imgElement = foto.querySelector('img');
+                imgElement.src = e.target.result; // Asignar la nueva imagen en base64 al 'src' del elemento 'img'.
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+}
 
     
   const enviar =divEditarAutor.querySelector('#submit')
