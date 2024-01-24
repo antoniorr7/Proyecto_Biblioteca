@@ -32,6 +32,6 @@
         "actualizar_obra": "UPDATE Obra SET titulo = :titulo, id_autor = :id_autor, fecha_publicacion = :fecha_publicacion, portada = :portada, reseña = :reseña, genero = :genero WHERE id = :id;",
         "borrar_obra": "DELETE FROM Obra WHERE id IN (:ids)",
         "listar_obras_avanzado": "SELECT id, titulo, id_autor, fecha_publicacion, reseña, genero FROM Obra;",
-        "buscar_autores": "SELECT * FROM Autor WHERE nombre LIKE :textoBusqueda.;"
+        "buscar_autores": "SELECT * FROM Autor WHERE nombre LIKE :textoBusqueda;"
     }
 }
