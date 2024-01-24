@@ -180,7 +180,7 @@ export class VistaListarAutor extends Vista {
     async pulsarEditar(autor){
         this.controlador.verVista(Vista.vistaeditarautor)
         const vistaEditarAutor = new VistaEditarAutor(autor)
-        vistaEditarAutor.rellenar(autor)
+        vistaEditarAutor.rellenar(autor, this.controlador)
        
     }
 }

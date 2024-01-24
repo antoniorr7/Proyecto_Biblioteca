@@ -77,10 +77,6 @@ export class Controlador {
         this.vistas.get(Vista.vistalistarautor).visualizarAutor();
         this.verVista(Vista.vistalistarautor);
     }
-
-   
-    
-   
     verVista (vista) {
         this.ocultarVistas()
         this.vistas.get(vista).mostrar(true)

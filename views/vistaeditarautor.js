@@ -5,10 +5,13 @@ export class VistaEditarAutor extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
     this.datos = new ModeloAutor();
+ 
   }
 
+  
 
-  rellenar(autor) {
+  rellenar(autor, controlador) {
+    
     // Verificar si el formulario está dentro del div con id 'divEditarAutor'
     const divEditarAutor = document.getElementById('divEditarAutor');
     if (!divEditarAutor) {
@@ -73,8 +76,8 @@ export class VistaEditarAutor extends Vista {
       foto: divEditarAutor.querySelector('#retrato img').getAttribute('src'),
       
   };
-    
     this.enviarAutor(autorData);
+    controlador.pulsarAutor()
   };
   }
 

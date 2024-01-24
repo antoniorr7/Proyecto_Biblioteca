@@ -181,7 +181,7 @@ export class VistaListarLibro extends Vista {
     async pulsarEditar(obra){
         this.controlador.verVista(Vista.vistaeditarlibro)
         const vistaEditarLibro = new VistaEditarLibro(obra)
-        vistaEditarLibro.rellenar(obra)
-       console.log(obra)
+        vistaEditarLibro.rellenar(obra, this.controlador)
+        console.log(obra)
     }
 }

@@ -8,7 +8,7 @@ export class VistaEditarLibro extends Vista {
     this.datos = new ModeloObra(); // Asegúrate de instanciar el modelo correcto
   }
 
-  rellenar(libro) {
+  rellenar(libro, controlador) {
     // Verificar si el formulario está dentro del div con id 'divEditarLibro'
     const divEditarLibro = document.getElementById('divEditarLibro');
     if (!divEditarLibro) {
@@ -91,8 +91,8 @@ export class VistaEditarLibro extends Vista {
             reseña: divEditarLibro.querySelector('#reseña').value,
             genero: divEditarLibro.querySelector('[name="genero"]').value,
         };
-  
         this.enviarLibro(libroData);
+        controlador.pulsarObra()
     };
     
   }
