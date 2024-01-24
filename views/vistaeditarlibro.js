@@ -92,7 +92,7 @@ export class VistaEditarLibro extends Vista {
             genero: divEditarLibro.querySelector('[name="genero"]').value,
         };
         this.enviarLibro(libroData);
-        controlador.pulsarObra()
+        controlador.pulsarLibro()
     };
     
   }
