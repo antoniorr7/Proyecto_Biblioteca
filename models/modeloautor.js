@@ -28,8 +28,10 @@ export class ModeloAutor {
         }
     }
     
-    async borrarAutor(id){
-        const respuesta = await this.rest.borrarAutor(id)
+    async borrarAutor(ids){
+        console.log('IDS AUTOR:', ids)
+        const respuesta = await this.rest.borrarAutor(ids)
+        console.log('id autor:' +ids)
         if (respuesta) {
             console.log('Autor borrado exitosamente:', respuesta);
         } else {

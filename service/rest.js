@@ -72,10 +72,10 @@ export class Rest {
         }
     }
 
-    async borrarAutor(id) {
-        console.log('rest: ' + id)
+    async borrarAutor(ids) {
+        console.log('rest: ' + ids)
         try {
-            const url = `${this.baseUrl}/autor/${id}`;
+            const url = `${this.baseUrl}/autor/${ids}`;
             const response = await fetch(url, {
                 method: 'DELETE',
                 headers: this.headers
@@ -150,9 +150,9 @@ export class Rest {
         }
     }
 
-    async borrarObra(id) {
+    async borrarObra(ids) {
         try {
-            const url = `${this.baseUrl}/obra/${id}`;
+            const url = `${this.baseUrl}/obra/${ids}`;
             const response = await fetch(url, {
                 method: 'DELETE',
                 headers: this.headers
