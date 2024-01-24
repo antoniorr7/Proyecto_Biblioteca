@@ -164,6 +164,26 @@ export class Rest {
             return null;
         }
     }
+    async buscarAutores(textoBusqueda) {
+        try {
+            const url = `${this.baseUrl}/autor/buscar`;
+    
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: this.headers,
+                mode: 'cors',
+                body: JSON.stringify({ texto: textoBusqueda })
+            });
+    
+            return this.handleResponse(response);
+        } catch (error) {
+            console.error('Error:', error);
+            return null;
+        }
+    }
+    
+    
+
 
     async handleResponse(response) {
         if (!response.ok) {

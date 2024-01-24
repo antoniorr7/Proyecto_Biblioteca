@@ -57,8 +57,9 @@ export class Controlador {
         inicio.onclick = this.pulsarInicio.bind(this)
         libros.onclick = this.pulsarLibro.bind(this)
         autores.onclick = this.pulsarAutor.bind(this)
+            
+        lupa.onclick = this.pulsarLupa.bind(this)
     
-        
     }
 
     pulsarInicio(){
@@ -86,7 +87,15 @@ export class Controlador {
         for(const vista of this.vistas.values())
             vista.mostrar(false)
     }
+    pulsarLupa(){
+        const lupa = document.getElementById('lupa')
+        const buscador = document.getElementById('buscador')
+       
+            const text = buscador.value; 
+          const respuesta = this.modeloautor.cogerBusqueda(text)
+           console.log(respuesta)
 
+    }
 }
 
 window.onload = () => {new Controlador()}

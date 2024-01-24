@@ -5,7 +5,7 @@ export class VistaEditarAutor extends Vista {
   constructor(controlador, base) {
     super(controlador, base);
     this.datos = new ModeloAutor();
- 
+    
   }
 
   

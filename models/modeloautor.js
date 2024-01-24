@@ -66,4 +66,12 @@ export class ModeloAutor {
       
        
     }
-  }
+    async cogerBusqueda(text){
+        console.log(text);
+        const respuesta = await this.rest.buscarAutores(text);
+        return respuesta;
+       
+    }
+
+    }
+  
