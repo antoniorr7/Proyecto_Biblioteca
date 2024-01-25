@@ -8,7 +8,7 @@ export class VistaEditarLibro extends Vista {
     this.datos = new ModeloObra(); // Asegúrate de instanciar el modelo correcto
   }
 
-  rellenar(libro) {
+  rellenar(libro, controlador) {
     // Verificar si el formulario está dentro del div con id 'divEditarLibro'
     const divEditarLibro = document.getElementById('divEditarLibro');
     if (!divEditarLibro) {
@@ -73,6 +73,25 @@ export class VistaEditarLibro extends Vista {
         // Supongamos que tienes una imagen en base64, puedes asignarla al atributo 'src' de un elemento 'img'.
         portadaDiv.innerHTML = `<img src="${libro.portada}" alt="Portada del libro" style='width:100px; height:auto; margin-bottom:10px;  object-fit:cover; border-radius:5px; margin-bottom:10px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);' >`;
     }
+    const nuevaPortadaInput = divEditarLibro.querySelector('#nuevaportada');
+    if (nuevaPortadaInput) {
+        nuevaPortadaInput.addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+    
+            if (file) {
+                const reader = new FileReader();
+    
+                reader.onload = function (e) {
+                    const imgElement = portadaDiv.querySelector('img'); // Corregir aquí
+                    imgElement.src = e.target.result; // Asignar la nueva imagen en base64 al 'src' del elemento 'img'.
+                };
+    
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+    
     
     // Evento para el botón de enviar
     const enviar = divEditarLibro.querySelector('#submit');
@@ -83,12 +102,13 @@ export class VistaEditarLibro extends Vista {
             titulo: divEditarLibro.querySelector('#titulo').value,
             id_autor: divEditarLibro.querySelector('[name="autor"]').value,
             fecha_publicacion: divEditarLibro.querySelector('#fecha').value,
-            portada: portadaImg ? portadaImg.getAttribute('src') : '', // Obtener el atributo 'src' de la imagen
+            portada: divEditarLibro.querySelector('#portada img').getAttribute('src'),// Obtener el atributo 'src' de la imagen
             reseña: divEditarLibro.querySelector('#reseña').value,
             genero: divEditarLibro.querySelector('[name="genero"]').value,
         };
   
         this.enviarLibro(libroData);
+        controlador.pulsarLibro()
     };
     
   }
