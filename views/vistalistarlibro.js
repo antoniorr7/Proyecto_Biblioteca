@@ -3,10 +3,13 @@ import { ModeloObra } from '../models/modeloobra.js';
 import { VistaLibro } from '../views/vistalibro.js';
 import { VistaListarAutor } from '../views/vistalistarautor.js';
 import { VistaEditarLibro } from '../views/vistaeditarlibro.js';
+import { VistaInsertarLibro } from '../views/vistainsertarlibro.js';
 // Función para establecer una cookie
 function colocarCookie(nombre, valor) {
     document.cookie = nombre + "=" + valor + ";path=/";
 }
+
+// Función para obtener el valor de una cookie por nombre
 
 
 export class VistaListarLibro extends Vista {
@@ -123,6 +126,7 @@ export class VistaListarLibro extends Vista {
         
         try {
   
+
             const obras = await this.datos.mostrarObra();
     
             if (obras) {
@@ -219,6 +223,8 @@ export class VistaListarLibro extends Vista {
     
     async pulsarCrear() {
         this.controlador.verVista(Vista.vistainsertarlibro);
+        const vistaInsertarLibro = new VistaInsertarLibro(this.controlador);
+        vistaInsertarLibro.llenarDesplegableAutores();
     }
 
     async pulsarBorrar(idObra) {
@@ -229,7 +235,7 @@ export class VistaListarLibro extends Vista {
     async pulsarObra() { 
         this.libroseleccionado = this.obra.id_autor;
         const vistaListarAutor = new VistaListarAutor(this.controlador, this.base, this.obraseleccionada);
-        vistaListarAutor.visualizarAutor();
+       
         this.datosobra.rellenarObra(this.obra);
         this.controlador.verVista(Vista.vistalibro);
     }

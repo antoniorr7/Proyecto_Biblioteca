@@ -224,7 +224,7 @@ export class VistaListarAutor extends Vista {
     async pulsarAutor() {
         this.autorseleccionado = this.autor ? this.autor.id : null; // Corregir error en la propiedad
         const vistaListarLibro = new VistaListarLibro(this.controlador, this.base, this.autorseleccionado);
-        vistaListarLibro.visualizarLibro();
+      
         this.datosautor.rellenarAutor(this.autor);
         this.controlador.verVista(Vista.vistaautor);
     }

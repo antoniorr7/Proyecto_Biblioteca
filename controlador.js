@@ -69,7 +69,6 @@ export class Controlador {
     async pulsarLibro() {
         this.vistas.get(Vista.vistalistarlibro).visualizarLibro()
         this.verVista(Vista.vistalistarlibro)
-        this.vistas.get(Vista.vistainsertarlibro).llenarDesplegableAutores()
     }
     
 
