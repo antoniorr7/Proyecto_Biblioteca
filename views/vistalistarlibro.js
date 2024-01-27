@@ -4,22 +4,17 @@ import { VistaLibro } from '../views/vistalibro.js';
 import { VistaListarAutor } from '../views/vistalistarautor.js';
 import { VistaEditarLibro } from '../views/vistaeditarlibro.js';
 import { VistaInsertarLibro } from '../views/vistainsertarlibro.js';
-// Función para establecer una cookie
-function colocarCookie(nombre, valor) {
-    document.cookie = nombre + "=" + valor + ";path=/";
-}
-
-// Función para obtener el valor de una cookie por nombre
-
+import { GestionCookies } from './gestioncookies.js';
 
 export class VistaListarLibro extends Vista {
     constructor(controlador, base, autorseleccionado) {
         super(controlador, base);
         this.datos = new ModeloObra();
         this.datosobra = new VistaLibro();
-        this.autorseleccionado = autorseleccionado;
 
+        this.autorseleccionado = autorseleccionado;
         this.listaMostrada = [];
+        this.inicializarCookies();
 
         const crear = document.getElementById('crearLibro')
         crear.onclick = this.pulsarCrear.bind(this);
@@ -33,9 +28,13 @@ export class VistaListarLibro extends Vista {
         
         this.obra = null; // Inicializar correctamente
         this.libroseleccionado = null; // Inicializar correctamente
-    }   
+    }
 
-
+    inicializarCookies() {
+        if (!this.obtenerCookieArray('Libros_Favoritos')) {
+            this.colocarCookieArray('Libros_Favoritos', []);
+        }
+    }
 
     seleccionarTodasObras() {
         const checkboxEstado = this.checkboxSeleccionarTodasObras.checked;
@@ -82,25 +81,64 @@ export class VistaListarLibro extends Vista {
 
     cambiarEstadoLibro(idLibro, favLibro) {
         const libroFavorito = this.comprobarCookie('Id_Libro_Fav_' + idLibro) === 'true';
-
+    
         if (libroFavorito) {
             this.quitarFavorito(idLibro, favLibro);
         } else {
             this.agregarFavorito(idLibro, favLibro);
         }
+    
+        // Actualizar la imagen del icono de favorito según el estado actual
+        favLibro.src = this.comprobarSiLibroEsFavorito(idLibro) ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
     }
 
-    // Función para agregar un libro a favoritos
-    agregarFavorito(idLibro, favLibro) {
-        favLibro.src = 'imagenes/favorite.png';
-        colocarCookie('Id_Libro_Fav_' + idLibro, 'true', 30);
+    agregarFavorito(idLibro) {
+        const librosFavoritos = this.obtenerCookieArray('Libros_Favoritos');
+        
+        // Verificar si el libro ya está en favoritos
+        const index = librosFavoritos.indexOf(idLibro);
+        if (index === -1) {
+            librosFavoritos.push(idLibro);
+            this.colocarCookieArray('Libros_Favoritos', librosFavoritos);
+        } else {
+            librosFavoritos.splice(index, 1); // Eliminar el libro si ya está en favoritos
+            this.colocarCookieArray('Libros_Favoritos', librosFavoritos);
+        }
+    
+        // No es necesario cambiar la imagen del icono de favorito aquí
     }
 
-    // Función para quitar un libro de favoritos
+    colocarCookieArray(nombre, array) {
+        const valor = JSON.stringify(array);
+        document.cookie = nombre + "=" + valor + ";path=/";
+    }
+
+    obtenerCookieArray(nombre) {
+        const nombreCookie = nombre + "=";
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.indexOf(nombreCookie) == 0) {
+                const valor = cookie.substring(nombreCookie.length);
+                return JSON.parse(valor);
+            }
+        }
+        return [];
+    }
+
     quitarFavorito(idLibro, favLibro) {
+        const librosFavoritos = this.obtenerCookieArray('Libros_Favoritos');
+        const indice = librosFavoritos.indexOf(idLibro);
+        if (indice !== -1) {
+            librosFavoritos.splice(indice, 1);
+            this.colocarCookieArray('Libros_Favoritos', librosFavoritos);
+        }
         favLibro.src = 'imagenes/favorite01.png';
-        colocarCookie('Id_Libro_Fav_' + idLibro, 'false', 30);
-        //No entiendo para que es el valor de las cookies
+    }
+
+    comprobarSiLibroEsFavorito(idLibro) {
+        const librosFavoritos = this.obtenerCookieArray('Libros_Favoritos');
+        return librosFavoritos.includes(idLibro);
     }
 
     comprobarCookie(nombre) {
@@ -113,19 +151,14 @@ export class VistaListarLibro extends Vista {
             }
             if (cookie.indexOf(nombreCookie) == 0) {
                 return cookie.substring(nombreCookie.length, cookie.length);
-    
-                //nombre de la cookie = Id_Libro_Fav_1=
-                //cookie = Id_Libro_Fav_1=true
-                //esto nos devolvera true o false ( para comprobar si la cookie esta activa o no)
+  
             }
         }
         return "";
     }
 
     async visualizarLibro() {
-        
         try {
-  
 
             const obras = await this.datos.mostrarObra();
     
@@ -190,10 +223,10 @@ export class VistaListarLibro extends Vista {
                     checkboxSeleccion.addEventListener('change', () => this.seleccionarObra(obra.id));
 
                     const favLibro = document.createElement('img');
-                    favLibro.src = this.comprobarCookie('Id_Libro_Fav_' + obra.id) === 'true' ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
+                    favLibro.src = this.comprobarSiLibroEsFavorito(obra.id) ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
                     favLibro.id = 'papelera';
                     favLibro.classList.add('editor');
-                    
+
                     favLibro.onclick = () => {
                         this.cambiarEstadoLibro(obra.id, favLibro);
                     };

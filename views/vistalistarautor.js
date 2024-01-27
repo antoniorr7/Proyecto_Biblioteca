@@ -9,8 +9,10 @@ export class VistaListarAutor extends Vista {
         super(controlador, base);
         this.datos = new ModeloAutor();
         this.datosautor = new VistaAutor();
+
         this.libroseleccionado = libroseleccionado;
         this.listaMostrada = [];
+        this.inicializarCookies();
 
         const crear = document.getElementById('añadir-autor');
         crear.addEventListener('click', this.pulsarCrear.bind(this));
@@ -28,6 +30,12 @@ export class VistaListarAutor extends Vista {
         this.autorseleccionado = null;
     }
     
+    inicializarCookies() {
+        if (!this.obtenerCookieArray('Autores_Favoritos')) {
+            this.colocarCookieArray('Autores_Favoritos', []);
+        }
+    }
+
     toggleSeleccionarTodosAutor() {
         const checkboxEstado = this.checkboxSeleccionarAutor.checked;
         this.seleccionados.clear(); // Limpiar selección actual
@@ -41,9 +49,11 @@ export class VistaListarAutor extends Vista {
     
 
     toggleSeleccionarAutor(idAutor) {
-        this.seleccionados.has(idAutor) ? this.seleccionados.delete(idAutor) : this.seleccionados.add(idAutor);
-    
-        // Actualizar el estado del checkbox "Seleccionar todos"
+        if(this.seleccionados.has(idAutor)){
+            this.seleccionados.delete(idAutor)
+        }else{
+            this.seleccionados.add(idAutor);
+        }
         this.checkboxSeleccionarAutor.checked = this.seleccionados.size === this.listaMostrada.length;
     
         this.actualizarEstadoBotonBorrar();
@@ -78,22 +88,56 @@ export class VistaListarAutor extends Vista {
         } else {
             this.agregarFavorito(idAutor, favAutor);
         }
+
+        favAutor.src = this.comprobarSiAutorEsFavorito(idAutor) ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
     }
 
     agregarFavorito(idAutor, favAutor) {
-        favAutor.src = 'imagenes/favorite.png';
-        this.colocarCookie('Id_Autor_Fav_' + idAutor, 'true', 30);
+        const autoresFavoritos = this.obtenerCookieArray('Autores_Favoritos');
+        
+        const index = autoresFavoritos.indexOf(idAutor);
+        if (index === -1) {
+            autoresFavoritos.push(idAutor);
+            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
+        } else {
+            autoresFavoritos.splice(index, 1); // Eliminar el libro si ya está en favoritos
+            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
+        }
     }
 
-    colocarCookie(nombre, valor) {
+    obtenerCookieArray(nombre) {
+        const nombreCookie = nombre + "=";
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.indexOf(nombreCookie) == 0) {
+                const valor = cookie.substring(nombreCookie.length);
+                return JSON.parse(valor);
+            }
+        }
+        return [];
+    }
+
+    colocarCookieArray(nombre, array) {
+        const valor = JSON.stringify(array);
         document.cookie = nombre + "=" + valor + ";path=/";
     }
 
     // Función para quitar un libro de favoritos
     quitarFavorito(idAutor, favAutor) {
+        const autoresFavoritos = this.obtenerCookieArray('Autores_Favoritos');
+        const indice = autoresFavoritos.indexOf(idAutor);
+        if (indice !== -1) {
+            autoresFavoritos.splice(indice, 1);
+            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
+        }
         favAutor.src = 'imagenes/favorite01.png';
-        this.colocarCookie('Id_Autor_Fav_' + idAutor, 'false', 30);
-        //No entiendo para que es el valor de las cookies
+    }
+
+
+    comprobarSiAutorEsFavorito(idAutor) {
+        const librosFavoritos = this.obtenerCookieArray('Autores_Favoritos');
+        return librosFavoritos.includes(idAutor);
     }
 
     comprobarCookie(nombre) {
@@ -174,8 +218,7 @@ export class VistaListarAutor extends Vista {
     
               
                 const favAutor = document.createElement('img');
-                favAutor.src = this.comprobarCookie('Id_Autor_Fav_' + autor.id) === 'true' ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
-                
+                favAutor.src = this.comprobarSiAutorEsFavorito(autor.id) ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
                 favAutor.classList.add('editor');
                 
                 favAutor.onclick = () => {
