@@ -96,6 +96,8 @@ export class Controlador {
            console.log(respuesta)
 
     }
+
+
 }
 
 window.onload = () => {new Controlador()}

@@ -104,9 +104,7 @@ export class VistaListarLibro extends Vista {
 
     comprobarCookie(nombre) {
         const nombreCookie = nombre + "=";
-        console.log(nombreCookie)
         const cookies = document.cookie.split(";");
-        console.log(cookies)
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i]; //Saca cada elemento del array
             while (cookie.charAt(0) == ' ') {

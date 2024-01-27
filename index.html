@@ -28,12 +28,18 @@
         </div>
         <!----------------------------------------------------------------------------------------------------->
         <div id="divMenuInicial">
-            <div id="horaCookie">
+                <!-- Banner de Cookies -->
+                <div id="cookie-banner" style="display: none;">
+                    <p>Este sitio web utiliza cookies. ¿Deseas aceptar las cookies?</p>
+                    <button id="accept-cookies">Aceptar</button>
+                    <button id="reject-cookies">Rechazar</button>
+                </div>
 
-            </div>
-            <div id="gif">
-                <img src="imagenes/Yg6I.gif">
-            </div>
+                <div id="estadoCookies">
+                    <!-- Contenido del div estadoCookies -->
+                  </div>
+                <div id="gif">Haz clic aquí para información</div>
+                <div id="horaCookie"></div>
         </div>
     </div>
     </div>
@@ -117,12 +123,12 @@
     
             <!-- Botón para borrar autores seleccionados -->
             <button id="borrar-autores">Borrar Seleccionados</button>
-
+            <input type="checkbox" id="seleccionar-autores"> Seleccionar Todos
             <!-- Botón inferior -->
             <div id="botones">
                 <input type="submit" value="Añadir Datos" id="añadir-autor"><br>
             </div>
-            <input type="checkbox" id="seleccionar-autores"> Seleccionar Todos
+            
         </div>
     </div>
     
