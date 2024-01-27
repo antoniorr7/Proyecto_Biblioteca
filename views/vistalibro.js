@@ -36,7 +36,6 @@ export class VistaLibro extends Vista {
       const autorEncontrado = autores.find(autor => autor.id === datos.id_autor);
   
       if (autorEncontrado) {
-        console.log(autorEncontrado);
   
         // Insertar imagen y nombre en el HTML
         document.querySelector('.card-detalles-libro').innerHTML = `

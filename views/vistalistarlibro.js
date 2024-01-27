@@ -8,8 +8,6 @@ function colocarCookie(nombre, valor) {
     document.cookie = nombre + "=" + valor + ";path=/";
 }
 
-// Función para obtener el valor de una cookie por nombre
-
 
 export class VistaListarLibro extends Vista {
     constructor(controlador, base, autorseleccionado) {
@@ -104,9 +102,7 @@ export class VistaListarLibro extends Vista {
 
     comprobarCookie(nombre) {
         const nombreCookie = nombre + "=";
-        console.log(nombreCookie)
         const cookies = document.cookie.split(";");
-        console.log(cookies)
         for (let i = 0; i < cookies.length; i++) {
             let cookie = cookies[i]; //Saca cada elemento del array
             while (cookie.charAt(0) == ' ') {
@@ -125,11 +121,8 @@ export class VistaListarLibro extends Vista {
 
     async visualizarLibro() {
         
-
-        this.listaMostrada = obras;
         try {
-            this.listaMostrada = await this.datos.mostrarObra() || [];
-
+  
             const obras = await this.datos.mostrarObra();
     
             if (obras) {
@@ -245,6 +238,5 @@ export class VistaListarLibro extends Vista {
         this.controlador.verVista(Vista.vistaeditarlibro)
         const vistaEditarLibro = new VistaEditarLibro(obra)
         vistaEditarLibro.rellenar(obra, this.controlador)
-        console.log(obra)
     }
 }

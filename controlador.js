@@ -67,14 +67,14 @@ export class Controlador {
     }
 
     async pulsarLibro() {
-        await this.modeloobra.mostrarObra()
         this.vistas.get(Vista.vistalistarlibro).visualizarLibro()
         this.verVista(Vista.vistalistarlibro)
+        this.vistas.get(Vista.vistainsertarlibro).llenarDesplegableAutores()
     }
     
 
     async pulsarAutor() {
-         await this.modeloautor.mostrarAutor();
+      
         this.vistas.get(Vista.vistalistarautor).visualizarAutor();
         this.verVista(Vista.vistalistarautor);
     }
@@ -93,7 +93,6 @@ export class Controlador {
        
             const text = buscador.value; 
           const respuesta = this.modeloautor.cogerBusqueda(text)
-           console.log(respuesta)
 
     }
 }

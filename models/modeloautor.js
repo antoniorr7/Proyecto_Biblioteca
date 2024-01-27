@@ -29,9 +29,9 @@ export class ModeloAutor {
     }
     
     async borrarAutor(ids){
-        console.log('IDS AUTOR:', ids)
+
         const respuesta = await this.rest.borrarAutor(ids)
-        console.log('id autor:' +ids)
+
         if (respuesta) {
             console.log('Autor borrado exitosamente:', respuesta);
         } else {
@@ -48,7 +48,7 @@ export class ModeloAutor {
             // Filtrar las autores que pertenecen al autor con el idAutor proporcionado
             const librosAutor = autores.filter(autor => autor.id === idAutorLibro);
 
-            console.log(`Lista de autores del libro con ID ${idAutorLibro}:`, librosAutor);
+ 
             return librosAutor;
         } catch (error) {
             console.error('Error al obtener los libros del autor:', error);
@@ -58,7 +58,7 @@ export class ModeloAutor {
     async editarAutor(autorData) {
         try
         {
-            console.log('modelo',autorData);
+
             const respuesta = await this.rest.actualizarAutor(autorData);
      
             console.log('Autor modificado exitosamente:', respuesta);

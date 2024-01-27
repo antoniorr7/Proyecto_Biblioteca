@@ -7,7 +7,7 @@ export class ModeloObra {
     async mostrarObra() {
         try {
             const obra = await this.rest.getObra()
-            console.log('Lista de obras:', obra)
+
             return obra;
         } catch (error) {
             console.error('Error al obtener la lista de Obras:', error);
@@ -46,7 +46,7 @@ export class ModeloObra {
             // Filtrar las obras que pertenecen al autor con el idAutor proporcionado
             const librosAutor = obras.filter(obra => obra.id_autor === idAutor);
 
-            console.log(`Lista de libros del autor con ID ${idAutor}:`, librosAutor);
+
             return librosAutor;
         } catch (error) {
             console.error('Error al obtener los libros del autor:', error);
@@ -55,10 +55,10 @@ export class ModeloObra {
     }
     async editarObra(obraData) {
         try {
-            console.log('modelo', obraData);
+
             const respuesta = await this.rest.actualizarObra(obraData);
      
-            console.log('Obra modificada exitosamente:', respuesta);
+
         } catch (error) {
             console.log(error);
         }
