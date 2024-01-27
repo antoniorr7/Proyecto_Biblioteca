@@ -17,6 +17,16 @@ export class Controlador {
    
 
     constructor() {
+        // Añade un elemento de imagen con un ID específico en tu HTML
+        const imagenInicio = document.getElementById('imagenInicio');
+
+        // Muestra la imagen durante 3 segundos antes de abrir la aplicación
+        setTimeout(() => {
+            imagenInicio.style.display = 'none';  // Oculta la imagen después de 3 segundos
+            this.verVista(Vista.vmenuinicial);    // Muestra la vista principal
+        }, 3000);  // 3000 milisegundos = 3 segundos
+
+
         this.modeloobra = new ModeloObra()
         this.modeloautor = new ModeloAutor()
         
