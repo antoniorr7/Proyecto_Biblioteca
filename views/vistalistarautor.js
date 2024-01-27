@@ -17,7 +17,6 @@ export class VistaListarAutor extends Vista {
         const crear = document.getElementById('añadir-autor');
         crear.addEventListener('click', this.pulsarCrear.bind(this));
 
-
         this.seleccionados = new Set();
         this.checkboxSeleccionarAutor = document.getElementById('seleccionar-autores');
         this.checkboxSeleccionarAutor.addEventListener('change', this.toggleSeleccionarTodosAutor.bind(this));
@@ -25,138 +24,10 @@ export class VistaListarAutor extends Vista {
         const borrarSeleccionados = document.getElementById('borrar-autores');
         borrarSeleccionados.addEventListener('click', this.borrarAutoresSeleccionados.bind(this));
         
-        
         this.autor = null;
         this.autorseleccionado = null;
     }
     
-    inicializarCookies() {
-        if (!this.obtenerCookieArray('Autores_Favoritos')) {
-            this.colocarCookieArray('Autores_Favoritos', []);
-        }
-    }
-
-    toggleSeleccionarTodosAutor() {
-        const checkboxEstado = this.checkboxSeleccionarAutor.checked;
-        this.seleccionados.clear(); // Limpiar selección actual
-    
-        if (checkboxEstado) {
-            this.seleccionados = new Set(this.listaMostrada.map(autor => autor.id));
-        }
-    
-        this.actualizarEstadoBotonBorrar();
-    }
-    
-
-    toggleSeleccionarAutor(idAutor) {
-        if(this.seleccionados.has(idAutor)){
-            this.seleccionados.delete(idAutor)
-        }else{
-            this.seleccionados.add(idAutor);
-        }
-        this.checkboxSeleccionarAutor.checked = this.seleccionados.size === this.listaMostrada.length;
-    
-        this.actualizarEstadoBotonBorrar();
-    }
-    
-
-    actualizarEstadoBotonBorrar() {
-        const borrarSeleccionados = document.getElementById('borrar-seleccionados');
-        borrarSeleccionados.disabled = this.seleccionados.size === 0;
-    }
-
-    async borrarAutoresSeleccionados() {
-        if (this.seleccionados.size === 0) {
-            alert('Selecciona al menos un autor para borrar.');
-            return;
-        }
-    
-        if (confirm('¿Estás seguro de que deseas borrar los autores seleccionadas?')) {
-            const idsSeleccionados = Array.from(this.seleccionados);
-            await this.datos.borrarAutor(idsSeleccionados);
-            this.controlador.pulsarAutor();
-        }
-    }
-    
-    
-
-    cambiarEstadoAutor(idAutor, favAutor) {
-        const autorFavorito = this.comprobarCookie('Id_Autor_Fav_' + idAutor) === 'true';
-
-        if (autorFavorito) {
-            this.quitarFavorito(idAutor, favAutor);
-        } else {
-            this.agregarFavorito(idAutor, favAutor);
-        }
-
-        favAutor.src = this.comprobarSiAutorEsFavorito(idAutor) ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
-    }
-
-    agregarFavorito(idAutor, favAutor) {
-        const autoresFavoritos = this.obtenerCookieArray('Autores_Favoritos');
-        
-        const index = autoresFavoritos.indexOf(idAutor);
-        if (index === -1) {
-            autoresFavoritos.push(idAutor);
-            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
-        } else {
-            autoresFavoritos.splice(index, 1); // Eliminar el libro si ya está en favoritos
-            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
-        }
-    }
-
-    obtenerCookieArray(nombre) {
-        const nombreCookie = nombre + "=";
-        const cookies = document.cookie.split(";");
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i].trim();
-            if (cookie.indexOf(nombreCookie) == 0) {
-                const valor = cookie.substring(nombreCookie.length);
-                return JSON.parse(valor);
-            }
-        }
-        return [];
-    }
-
-    colocarCookieArray(nombre, array) {
-        const valor = JSON.stringify(array);
-        document.cookie = nombre + "=" + valor + ";path=/";
-    }
-
-    // Función para quitar un libro de favoritos
-    quitarFavorito(idAutor, favAutor) {
-        const autoresFavoritos = this.obtenerCookieArray('Autores_Favoritos');
-        const indice = autoresFavoritos.indexOf(idAutor);
-        if (indice !== -1) {
-            autoresFavoritos.splice(indice, 1);
-            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
-        }
-        favAutor.src = 'imagenes/favorite01.png';
-    }
-
-
-    comprobarSiAutorEsFavorito(idAutor) {
-        const librosFavoritos = this.obtenerCookieArray('Autores_Favoritos');
-        return librosFavoritos.includes(idAutor);
-    }
-
-    comprobarCookie(nombre) {
-        const nombreCookie = nombre + "=";
-
-        const cookies = document.cookie.split(";");
-
-        for (let i = 0; i < cookies.length; i++) {
-            let cookie = cookies[i]; //Saca cada elemento del array
-            while (cookie.charAt(0) == ' ') {
-                cookie = cookie.substring(1); //Esto nos elimina los espacios en blanco que hay al principio
-            }
-            if (cookie.indexOf(nombreCookie) == 0) {
-                return cookie.substring(nombreCookie.length, cookie.length);
-            }
-        }
-        return "";
-    }
-
     async visualizarAutor() {
         const autores = await this.datos.mostrarAutor();
         this.listaMostrada = autores;
@@ -164,7 +35,6 @@ export class VistaListarAutor extends Vista {
         if (autores) {
             const scrollDiv = document.getElementById('scroll');
     
-            // Limpiar la tabla existente
             scrollDiv.innerHTML = '';
     
             const tablaAutores = document.createElement('table');
@@ -187,16 +57,10 @@ export class VistaListarAutor extends Vista {
                 const checkboxSeleccion = document.createElement('input');
                 checkboxSeleccion.type = 'checkbox';
                 checkboxSeleccion.addEventListener('change', () => this.toggleSeleccionarAutor(autor.id));
-                imagenColumna.appendChild(checkboxSeleccion);
-    
+                
                 const nombreAutorSpan = document.createElement('span');
                 nombreAutorSpan.classList.add('nombre-autor');
                 nombreAutorSpan.textContent = autor.nombre;
-    
-                imagenLink.appendChild(imagen);
-                imagenLink.appendChild(nombreAutorSpan);
-    
-                imagenColumna.appendChild(imagenLink);
     
                 const editorColumna = document.createElement('td');
                 editorColumna.classList.add('editor-columna');
@@ -212,11 +76,6 @@ export class VistaListarAutor extends Vista {
                 // Añadir un manejador de eventos al hacer clic en la papelera
                 eliminarImagen.onclick = () => this.pulsarBorrar(autor.id);
     
-
-                imagenColumna.appendChild(editores);
-                editores.appendChild(eliminarImagen);
-    
-              
                 const favAutor = document.createElement('img');
                 favAutor.src = this.comprobarSiAutorEsFavorito(autor.id) ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
                 favAutor.classList.add('editor');
@@ -233,14 +92,16 @@ export class VistaListarAutor extends Vista {
                 // Añadir un manejador de eventos al hacer clic en el lápiz
                 editarImagen.onclick = () => this.pulsarEditar(autor);
     
+                imagenColumna.appendChild(checkboxSeleccion);
+                imagenLink.appendChild(imagen);
+                imagenLink.appendChild(nombreAutorSpan);
+                imagenColumna.appendChild(imagenLink);
                 editores.appendChild(editarImagen);
                 editores.appendChild(favAutor);
-    
-                 // Agrega el enlace de editar junto al de eliminar
-    
                 filaAutor.appendChild(imagenColumna);
-    
                 tablaAutores.appendChild(filaAutor);
+                imagenColumna.appendChild(editores);
+                editores.appendChild(eliminarImagen);
     
                 imagenLink.addEventListener('click', () => {
                     this.autor = autor;
@@ -277,4 +138,180 @@ export class VistaListarAutor extends Vista {
         const vistaEditarAutor = new VistaEditarAutor(autor);
         vistaEditarAutor.rellenar(autor, this.controlador);
     }
+
+    /*-----------------------GESTION DE COOKIES--------------------- */
+    inicializarCookies() {
+        if (!this.obtenerCookieArray('Autores_Favoritos')) {
+            this.colocarCookieArray('Autores_Favoritos', []);
+        }
+    }
+
+    cambiarEstadoAutor(idAutor, favAutor) {
+        const autorFavorito = this.comprobarCookie('Id_Autor_Fav_' + idAutor) === 'true';
+
+        if (autorFavorito) {
+            this.quitarFavorito(idAutor, favAutor);
+        } else {
+            this.agregarFavorito(idAutor, favAutor);
+        }
+
+        favAutor.src = this.comprobarSiAutorEsFavorito(idAutor) ? 'imagenes/favorite.png' : 'imagenes/favorite01.png';
+    }
+
+    quitarFavorito(idAutor, favAutor) {
+        const autoresFavoritos = this.obtenerCookieArray('Autores_Favoritos');
+        const indice = autoresFavoritos.indexOf(idAutor);
+        if (indice !== -1) {
+            autoresFavoritos.splice(indice, 1);
+            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
+        }
+        favAutor.src = 'imagenes/favorite01.png';
+    }
+
+    obtenerCookieArray(nombre) {
+        const nombreCookie = nombre + "=";
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.indexOf(nombreCookie) == 0) {
+                const valor = cookie.substring(nombreCookie.length);
+                return JSON.parse(valor);
+            }
+        }
+        return [];
+    }
+
+    comprobarCookie(nombre) {
+        const nombreCookie = nombre + "=";
+
+        const cookies = document.cookie.split(";");
+
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i]; //Saca cada elemento del array
+            while (cookie.charAt(0) == ' ') {
+                cookie = cookie.substring(1); //Esto nos elimina los espacios en blanco que hay al principio
+            }
+            if (cookie.indexOf(nombreCookie) == 0) {
+                return cookie.substring(nombreCookie.length, cookie.length);
+            }
+        }
+        return "";
+    }
+
+    agregarFavorito(idAutor) {
+        const autoresFavoritos = this.obtenerCookieArray('Autores_Favoritos');
+        
+        const index = autoresFavoritos.indexOf(idAutor);
+        if (index === -1) {
+            autoresFavoritos.push(idAutor);
+            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
+        } else {
+            autoresFavoritos.splice(index, 1); // Eliminar el libro si ya está en favoritos
+            this.colocarCookieArray('Autores_Favoritos', autoresFavoritos);
+        }
+    }
+
+    colocarCookieArray(nombre, array) {
+        const valor = JSON.stringify(array);
+        document.cookie = nombre + "=" + valor + ";path=/";
+    }
+
+    comprobarSiAutorEsFavorito(idAutor) {
+        const librosFavoritos = this.obtenerCookieArray('Autores_Favoritos');
+        return librosFavoritos.includes(idAutor);
+    }
+
+    
+    /* -------------------------------- BORRADO MULTIPLES   --------------------------------*/
+
+    toggleSeleccionarTodosAutor() {
+        const checkboxEstado = this.checkboxSeleccionarAutor.checked;
+        this.seleccionados.clear();
+    
+        if (checkboxEstado) {
+            this.seleccionados = new Set(this.listaMostrada.map(autor => autor.id));
+        }
+    
+        this.actualizarEstadoBotonBorrar();
+    }
+    
+    toggleSeleccionarAutor(idAutor) {
+        if(this.seleccionados.has(idAutor)){
+            this.seleccionados.delete(idAutor)
+        }else{
+            this.seleccionados.add(idAutor);
+        }
+        this.checkboxSeleccionarAutor.checked = this.seleccionados.size === this.listaMostrada.length;
+    
+        this.actualizarEstadoBotonBorrar();
+    }
+    
+    actualizarEstadoBotonBorrar() {
+        const borrarSeleccionados = document.getElementById('borrar-seleccionados');
+        borrarSeleccionados.disabled = this.seleccionados.size === 0;
+    }
+
+    async borrarAutoresSeleccionados() {
+        if (this.seleccionados.size === 0) {
+            this.mostrarMensaje('Selecciona al menos un autor para borrar.');
+            return;
+        }
+    
+        const respuesta = await this.mostrarConfirmacion('¿Estás seguro de que deseas borrar los autores seleccionados?');
+    
+        if (respuesta) {
+            const idsSeleccionados = Array.from(this.seleccionados);
+            await this.datos.borrarAutor(idsSeleccionados);
+            this.controlador.pulsarAutor();
+        }
+    }
+    
+    mostrarMensaje(mensaje) {
+        const mensajeDiv = document.createElement('div');
+        mensajeDiv.textContent = mensaje;
+        // Establece estilos según tus necesidades
+    
+        document.body.appendChild(mensajeDiv);
+    
+        setTimeout(() => {
+            document.body.removeChild(mensajeDiv);
+        }, 3000);
+    }
+    
+    async mostrarConfirmacion(mensaje) {
+        return new Promise(resolve => {
+            const confirmacionDiv = document.createElement('div');
+            confirmacionDiv.style.position = 'fixed';
+            confirmacionDiv.style.top = '50%';
+            confirmacionDiv.style.left = '50%';
+            confirmacionDiv.style.transform = 'translate(-50%, -50%)';
+            confirmacionDiv.style.backgroundColor = '#fff';
+            confirmacionDiv.style.border = '1px solid #ccc';
+            confirmacionDiv.style.padding = '10px';
+            confirmacionDiv.style.zIndex = '1000';
+    
+            const mensajeP = document.createElement('p');
+            mensajeP.textContent = mensaje;
+            confirmacionDiv.appendChild(mensajeP);
+    
+            const botonAceptar = document.createElement('button');
+            botonAceptar.textContent = 'Aceptar';
+            botonAceptar.addEventListener('click', () => {
+                document.body.removeChild(confirmacionDiv);
+                resolve(true);
+            });
+            confirmacionDiv.appendChild(botonAceptar);
+    
+            const botonRechazar = document.createElement('button');
+            botonRechazar.textContent = 'Rechazar';
+            botonRechazar.addEventListener('click', () => {
+                document.body.removeChild(confirmacionDiv);
+                resolve(false);
+            });
+            confirmacionDiv.appendChild(botonRechazar);
+    
+            document.body.appendChild(confirmacionDiv);
+        });
+    }
+    
 }
