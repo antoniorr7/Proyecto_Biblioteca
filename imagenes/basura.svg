@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="basura.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.9578168"
+     inkscape:cx="245.42644"
+     inkscape:cy="512.56073"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect15"
+       is_visible="true"
+       lpeversion="1" />
+    <linearGradient
+       id="swatch14"
+       inkscape:swatch="solid">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop14" />
+    </linearGradient>
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect14"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect13"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect12"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect11"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect10"
+       is_visible="true"
+       lpeversion="1" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect9"
+       is_visible="true"
+       lpeversion="1" />
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#000000;fill-opacity:0.861004;stroke:#8d8c8a;stroke-width:0.70988;stroke-linecap:round;stroke-opacity:0.83137298"
+       id="rect4"
+       width="34.169052"
+       height="38.358463"
+       x="61.500557"
+       y="122.31448"
+       ry="4.2395797" />
+    <ellipse
+       style="fill:#ffffff;fill-opacity:0.86100394;stroke:#ffffff;stroke-width:0.687999;stroke-linecap:round;stroke-opacity:0.83137298"
+       id="path5"
+       cx="69.125153"
+       cy="144.95624"
+       rx="2.5001276"
+       ry="11.622214" />
+    <ellipse
+       style="fill:#ffffff;fill-opacity:0.86100394;stroke:#ffffff;stroke-width:0.687999;stroke-linecap:round;stroke-opacity:0.83137298"
+       id="path5-0"
+       cx="78.326157"
+       cy="144.95624"
+       rx="2.5001276"
+       ry="11.622214" />
+    <ellipse
+       style="fill:#ffffff;fill-opacity:0.86100394;stroke:#ffffff;stroke-width:0.687999;stroke-linecap:round;stroke-opacity:0.83137298"
+       id="path5-4"
+       cx="87.88134"
+       cy="144.95624"
+       rx="2.5001276"
+       ry="11.622214" />
+    <rect
+       style="fill:#000000;fill-opacity:0.861004;stroke:#8d8c8a;stroke-width:0.59393;stroke-linecap:round;stroke-opacity:0.83137298"
+       id="rect6"
+       width="32.663296"
+       height="4.8240395"
+       x="41.95401"
+       y="125.59949"
+       ry="2.4120197"
+       transform="rotate(-9.7515742)" />
+  </g>
+</svg>
